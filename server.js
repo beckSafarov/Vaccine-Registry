@@ -16,8 +16,7 @@ app.set('view engine', 'ejs');
 const routes = require('./routes/routes'),
   connectDB = require('./config/db'); //connecting the database
 
-connectDB();
-app.use(express.json()); //body parser 
+connectDB(); 
 app.use('/', routes); 
 
 

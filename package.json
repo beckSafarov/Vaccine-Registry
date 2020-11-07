@@ -1,7 +1,7 @@
 {
-  "name": "cookhelper",
+  "name": "vaccineRegistry",
   "version": "1.0.0",
-  "description": "an app to assist cooking",
+  "description": "an app to register vaccine buyers or takers online",
   "main": "server.js",
   "scripts": {
     "start": "NODE_ENV=production node server",
