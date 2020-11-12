@@ -9,22 +9,19 @@ const userSchema = new mongoose.Schema({
         maxlength: [30, 'Name cannot be more than 30 characters'],
       },
     slug: String,
+    password: {
+        type: String, 
+        select: false
+    },
     email: {
         type: String,
         required: [true, 'Please add an email'],
         unique: true, 
     },
-    weight: {
-        type: Number, 
-        required: true
-    },
-    height: {
-        type: Number, 
-        required: true
-    },
-    weightCategory: String, //overweight, normal, underweight
-    ingredients: [String],
-    foodHabits: [String],
+    date: {
+        type: Date, 
+        unique: true
+    }
 })
 
 module.exports = mongoose.model('user', userSchema);

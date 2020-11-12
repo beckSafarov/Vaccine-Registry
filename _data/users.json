@@ -1,0 +1,19 @@
+[
+    {
+        "name": "John Doe",
+        "email": "johndoe@gmail.com"
+    },
+    {
+        "name": "Elton Smith",
+        "email": "etonsmith@gmail.com"
+    },
+    {
+        "name": "Beck Safarov",
+        "email": "becksafarov@gmail.com"
+    },
+    {
+        "name": "Admin Adminovich",
+        "email": "becksafarov@gmail.com",
+        "password": "123456"
+    }
+]

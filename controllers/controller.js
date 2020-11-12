@@ -8,18 +8,27 @@ exports.indexPage = (req, res, next) => {
     res.render('index'); 
   };
 
-//@desc      Sign up page
-//@route     GET /signup 
+//@desc      Register/make an appointment for vaccine
+//@route     GET /register 
 //@access    Public
-exports.signUpPage = (req, res, next) => {
-    res.render('signup'); 
+exports.register = (req, res, next) => {
+    res.render('register'); 
   };
+
+//@desc      FAQ page
+//@route     GET /faq 
+//@access    Public
+exports.faq = (req, res, next) => {
+  res.render('faq'); 
+};
+
 
 //@desc      create/sign-up a new user, 
 //@route     POST /signup 
 //@access    Public
 exports.createNewUser = async(req, res, next) => {
   const newUser = await User.create(req.body);
+  console.log(req.body);
   res.status(201).json({
     success: true,
     data: newUser,
@@ -27,9 +36,26 @@ exports.createNewUser = async(req, res, next) => {
 };
 
 //@desc      login
-//@route     POST /login
+//@route     GET /admin
 //@access    Public
-exports.login = (req, res, next) => {
-    res.json({ success: true, msg: 'Let\'s imagine that you have entered your login credentials' });
+exports.adminLoginPage = (req, res, next) => {
+    res.render('adminLogin'); 
  };
+
+//@desc      login credentials 
+//@route     POST /admin
+//@access    Public
+exports.adminLogin = (req, res, next) => {
+  res.json({success: true, msg: 'You have done it'});
+};
+
+//@desc      admin dashboard
+//@route     GET /admin/dashboard
+//@access    Public
+exports.adminDashboard = (req, res, next) => {
+  res.render('adminDashboard'); 
+};
+
+
  
+

@@ -10,7 +10,8 @@ const express = require('express'),
 //load env vars
 dotenv.config({ path: './config/config.env' });
 app.set('view engine', 'ejs');
-
+//Body parser
+app.use(express.json());
 
 //the next set of declarations 
 const routes = require('./routes/routes'),
