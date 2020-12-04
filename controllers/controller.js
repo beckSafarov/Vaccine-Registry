@@ -1,5 +1,7 @@
 const express = require('express'),
-    User = require('../modules/user');
+    User = require('../modules/user'),
+    asyncHandler = require('../middleware/async'),
+    errorResponse = require('../middleware/error'); 
 
 //@desc      Open the home page
 //@route     GET /
@@ -24,16 +26,16 @@ exports.faq = (req, res, next) => {
 
 
 //@desc      create/sign-up a new user, 
-//@route     POST /signup 
+//@route     POST /register 
 //@access    Public
-exports.createNewUser = async(req, res, next) => {
+exports.createNewUser = asyncHandler(async(req, res, next) => {
   const newUser = await User.create(req.body);
   console.log(req.body);
   res.status(201).json({
     success: true,
     data: newUser,
   });
-};
+});
 
 //@desc      login
 //@route     GET /admin

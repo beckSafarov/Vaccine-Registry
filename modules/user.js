@@ -1,10 +1,10 @@
 const mongoose = require('mongoose');
+const slugify = require('slugify');
 
 const userSchema = new mongoose.Schema({
     name: {
         type: String,
         required: [true, 'Please add a name'],
-        unique: true,
         trim: true,
         maxlength: [30, 'Name cannot be more than 30 characters'],
       },
@@ -19,9 +19,19 @@ const userSchema = new mongoose.Schema({
         unique: true, 
     },
     date: {
-        type: Date, 
-        unique: true
+      required: true,
+      type: Date,
+    },
+    time: {
+      required: true, 
+      type: String
     }
 })
+
+// Create name slug from the name
+userSchema.pre('save', function (next) {
+    this.slug = slugify(this.name, { lower: true });
+    next();
+  });
 
 module.exports = mongoose.model('user', userSchema);

@@ -3,6 +3,7 @@ const express = require('express'),
   app = express(),
   morgan =require('morgan'),
   colors = require('colors'),
+  errorHandler = require('./middleware/error'),
   PORT = process.env.PORT || 5000;
 
 
@@ -18,7 +19,8 @@ const routes = require('./routes/routes'),
   connectDB = require('./config/db'); //connecting the database
 
 connectDB(); 
-app.use('/', routes); 
+app.use('/', routes);  //mounting routes
+app.use(errorHandler); 
 
 
 
@@ -27,9 +29,30 @@ if (process.env.NODE_ENV == 'development') {
   app.use(morgan('dev'));
 }
 
-app.listen(
+const server = app.listen(
   PORT,
   console.log(
     `Server is running in ${process.env.NODE_ENV} mode on port ${PORT}`.yellow.bold
   )
 );
+
+//handle unhandled rejections
+process.on('unhandledRejection', (err, promise) => {
+  console.log('unhandledRejection', err.message);
+  //close server & exit process
+  server.close();
+});
+
+//handling crashes
+process.on('uncaughtException', (err, promise) => {
+  console.log('uncaughtException', err.message);
+  //close server & exit process
+  server.close();
+});
+
+//killing server
+process.on('SIGTERM', (err, promise) => {
+  console.log('SIGTERM', err.message);
+  //close server & exit process
+  server.close();
+});

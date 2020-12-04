@@ -3,18 +3,94 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/skeleton/2.0.4/skeleton.min.css" integrity="sha512-EZLkOqwILORob+p0BXZc+Vm3RgJBOe1Iq/0fiI7r/wJgzOFZMlsqTa29UEl6v6U6gsV4uIpsNZoV32YZqrCRCQ==" crossorigin="anonymous" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
     <title>Register</title>
 </head>
 <body>
-    <h1>REGISTER page</h1>
-    <form action="/register" method="POST">
-        <label for="name">Enter your email</label>
-         <input type="text" name="name" id="name" required>
-        <label for="email">Enter your email</label>
-         <input type="email" name="email" id="email" required>
-         <br>
-        <button type="submit">Submit</button>
-    </form>
+    <div class="container">
+        <h1>Register</h1>
+        <form id = "form" action = "/register" method = "POST">
+            <div class="input-field">
+                <label for="name">Enter your name</label>
+                <input id = "name" type="text" name="name" id="name" required>
+            </div>
+            <div class="input-field">
+                <label for="email">Enter your email</label>
+                <input id = "email" type="email" name="email" id="email" required>
+            </div>
+            <label for="date">Date</label>
+            <input id = "date" name = "date" type="text" class = "datepicker">
+            <label for="time">Time</label>
+            <input id = "time" name = "time" type="text" class="timepicker">
+            <br>
+            <input class = "white-text waves-effect navtext btn blue darken-2 hoverable" type="submit" value = "Submit">
+        </form>
+    </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+    <script>
+        const name = document.getElementById('name'); 
+        const email = document.getElementById('email');
+        const date = document.getElementById('date');
+        const time = document.getElementById('time');
+        
+        console.log('Name is: ' + name.value);
+        document.addEventListener('DOMContentLoaded', function() {
+            var elems = document.querySelectorAll('.datepicker');
+            var instances = M.Datepicker.init(elems, {
+                autoclose: true, 
+                disableWeekends: true,
+                firstDay: 1,
+                showMonthAfterYear: true, 
+                showDaysInNextAndPreviousMonths: true, 
+                showClearBtn: true,
+            }); 
+          });
+          
+
+          document.addEventListener('DOMContentLoaded', function() {
+            var elems = document.querySelectorAll('.timepicker');
+            var instances = M.Timepicker.init(elems, {
+                showClearBtn: true
+            });
+         });
+
+         async function post(url, data){
+            
+            const response = await fetch(url, {
+                    method: 'POST',
+                    headers: {
+                        'Content-type':'application/json'
+                    },
+                    body: JSON.stringify(data)
+            }); 
+            const resData = await response.json(); 
+            console.log('This is: '+resData);
+            return resData;        
+        }
+
+        document.getElementById('form').addEventListener('submit', function(e){
+            e.preventDefault();
+            console.log('Post function');
+            const data = {
+                name: name.value,
+                email: email.value, 
+                date: date.value, 
+                time: time.value
+            }
+
+            //create post
+            post('http://localhost:5000/register', data)
+            .then(data => console.log(data))
+            .catch(err => console.log(err));
+
+            name.value = '';
+            email.value = '';
+            date.value = '';
+            time.value = '';
+        })
+
+
+    </script>
 </body>
+
 </html>

@@ -1,0 +1,94 @@
+div {
+  color: black;
+}
+
+p {
+  font-family: 'Spectral', serif;
+  font-size: 18px;
+}
+
+a {
+  font-family: 'Cairo', sans-serif;
+  color: black;
+  font-size: 14px;
+}
+.flow-text {
+  font-size: 18px;
+}
+
+.headline,
+.brand-logo {
+  font-family: 'Cairo', sans-serif;
+  color: #424242;
+}
+
+.btn {
+  border-radius: 25px;
+  background-color: #1976d2;
+}
+
+.heading {
+  font-family: 'Cairo', sans-serif;
+  padding-bottom: 20px;
+}
+
+h2 {
+  font-family: 'Cairo', sans-serif;
+}
+
+.about-image {
+  margin-top: 28px;
+}
+
+hr {
+  border-top: 1px solid grey;
+  width: 70%;
+  color: black;
+}
+
+h5 {
+  font-family: 'Spectral', serif;
+  color: black;
+}
+
+.sidenav {
+  padding-top: 20px;
+}
+
+.new-section {
+  margin-top: 50px;
+}
+
+.slider-image {
+  opacity: 0.6;
+}
+
+.opacity {
+  opacity: 0.4;
+}
+
+.card-photo {
+  opacity: 0.8;
+}
+
+.dropdown-elements {
+  color: black;
+}
+
+.review-img {
+  height: 130px;
+  width: 130px;
+}
+
+.section-about,
+.section-contact {
+  background-color: whitesmoke;
+}
+
+.input-field {
+  padding-top: 20px;
+}
+
+.footer-icon {
+  padding-right: 15px;
+}
