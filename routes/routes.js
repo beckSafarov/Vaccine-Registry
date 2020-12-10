@@ -6,7 +6,7 @@ const express = require('express'),
       createNewUser,
       adminLoginPage, 
       adminLogin,
-      adminDashboard
+      adminDashboard,
     } = require('../controllers/controller');
   
 

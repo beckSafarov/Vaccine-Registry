@@ -17,6 +17,7 @@ app.use(express.json());
 
 //the next set of declarations 
 const routes = require('./routes/routes'),
+  payRoutes = require('./routes/payRoutes'),
   connectDB = require('./config/db'); //connecting the database
 
 connectDB(); 
@@ -25,6 +26,7 @@ connectDB();
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', routes);  //mounting routes
+app.use('/pay', payRoutes);
 app.use(errorHandler); 
 
 

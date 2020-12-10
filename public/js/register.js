@@ -4,6 +4,7 @@
         const time = document.getElementById('time');
         const warningBtn = document.getElementById('warning-btn'); 
         
+        //date picker 
         document.addEventListener('DOMContentLoaded', function() {
             var elems = document.querySelectorAll('.datepicker');
             var instances = M.Datepicker.init(elems, {
@@ -16,7 +17,7 @@
             }); 
           });
           
-
+          //time picker
           document.addEventListener('DOMContentLoaded', function() {
             var elems = document.querySelectorAll('.timepicker');
             var instances = M.Timepicker.init(elems, {
@@ -24,7 +25,7 @@
             });
          });
 
-
+         //post function to make a post request to the server
          async function post(url, data){
             
             const response = await fetch(url, {
@@ -38,6 +39,7 @@
             return resData;        
         }
 
+        //make post request with data
         document.getElementById('form').addEventListener('click', function(e){
             e.preventDefault();
             const data = {
@@ -47,7 +49,7 @@
                 time: time.value
             }
 
-            //make post request with data
+            
             post('http://localhost:5000/register', data)
             .then(data => {
                 if(data.success == false){
@@ -62,7 +64,8 @@
                 
             })
             .catch(err => console.log(err));
-
+        
+        
             
         })//end of the post function 
 
