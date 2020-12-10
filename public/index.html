@@ -5,7 +5,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
    
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-     <!--materialize css link-->
+    <!--skeleton link -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/skeleton/2.0.4/skeleton.css" 
+    integrity="sha512-5fsy+3xG8N/1PV5MIJz9ZsWpkltijBI48gBzQ/Z2eVATePGHOkMIn+xTDHIfTZFVb9GMpflF2wOWItqxAP2oLQ==" crossorigin="anonymous" />
+
+     <!--materialize css link, funny huh?-->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@600&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Alegreya+Sans:wght@300&display=swap" rel="stylesheet">
@@ -13,103 +17,7 @@
     <link rel="icon" href=”assets/img/IMALogo.png” sizes="16x16">
     <script defer src="https://use.fontawesome.com/releases/v5.0.9/js/all.js" integrity="sha384-8iPTk2s/jMVj81dnzb/iFR2sdA7u06vHJyyLlAd4snFpCl/SnyUjRrbdJsw1pGIl"
     crossorigin="anonymous"></script>
-    <style>
-        div {
-         color: black;
-        }
-
-        p {
-            font-family: 'Spectral', serif;
-            font-size: 18px;
-        }
-
-        a {
-            font-family: 'Cairo', sans-serif;
-            color: black;
-            font-size: 14px;
-        }
-        .flow-text {
-            font-size: 18px;
-        }
-
-        .headline,
-        .brand-logo {
-            font-family: 'Cairo', sans-serif;
-            color: #424242;
-        }
-
-        .btn {
-            border-radius: 25px;
-            background-color: #1976d2;
-        }
-
-        .heading {
-            font-family: 'Cairo', sans-serif;
-            padding-bottom: 20px;
-        }
-
-        h2 {
-            font-family: 'Cairo', sans-serif;
-        }
-
-        .about-image {
-            margin-top: 28px;
-        }
-
-        hr {
-            border-top: 1px solid grey;
-            width: 70%;
-            color: black;
-        }
-
-        h5 {
-            font-family: 'Spectral', serif;
-            color: black;
-        }
-
-        .sidenav {
-         padding-top: 20px;
-        }
-
-        .new-section {
-            margin-top: 50px;
-        }
-
-        .slider-image {
-            opacity: 0.6;
-        }
-
-        .opacity {
-            opacity: 0.4;
-        }
-
-        .card-photo {
-            opacity: 0.8;
-        }
-
-        .dropdown-elements {
-            color: black;
-        }
-
-        .review-img {
-            height: 130px;
-            width: 130px;
-        }
-
-        .section-about,
-        .section-contact {
-            background-color: whitesmoke;
-        }
-
-        .input-field {
-            padding-top: 20px;
-        }
-
-        .footer-icon {
-            padding-right: 15px;
-        }
-
-    </style>
+    <link rel="stylesheet" type = "text/css" href="css/style.css">
     <title>Vaccine Registry</title>
 </head>
 <body id = "home" class = "scrollspy black-text">
@@ -139,7 +47,7 @@
                         </li>
                         <li>
                           <form action="/register" method = "GET">
-                            <button class = "white-text waves-effect navtext btn blue darken-2 hoverable" >Get Vaccine</button>
+                            <button class = "white-text waves-effect waves-light navtext btn blue darken-2 hoverable" >Get Vaccine</button>
                          </form>
                        </li>
                     </ul>
@@ -159,12 +67,6 @@
         <li><form action="/register" method = "GET"><button class = "white-text center-align btn blue darken-2" style = "margin-left: 20px;">Get Vaccine</button></form></li>
     </ul>
 
-    <!-- Dropdown Structure -->
-    <ul id='dropdown1' class='dropdown-content'>
-      <li><a href="#" style = "color:black">House</a></li>
-      <li><a href="#" style = "color:black">Kitchen</a></li>
-      <li><a href="#" style = "color:black">Office</a></li>
-    </ul>
     
     <!--2. Slider-->
   <div class="slider">
@@ -359,30 +261,7 @@
 
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
-    <script>
-        const sidenav = document.querySelector('.sidenav'); 
-        M.Sidenav.init(sidenav, {});  
-
-
-        document.addEventListener('DOMContentLoaded', function() {
-            var elems = document.querySelectorAll('.slider');
-            var instances = M.Slider.init(elems, {
-                indicators: false, 
-                height: 780,
-                transition: 500, 
-                interval: 4000
-            });
-        });
-
-        document.addEventListener('DOMContentLoaded', function() {
-            var elems = document.querySelector('.dropdown-trigger');
-            var instances = M.Dropdown.init(elems, {});
-        });
-
-        document.addEventListener('DOMContentLoaded', function() {
-            var elems = document.querySelectorAll('.scrollspy');
-            var instances = M.ScrollSpy.init(elems, {});
-        });
-    </script>
+    
+    <script src = "js/index.js"> </script>
 </body>
 </html>

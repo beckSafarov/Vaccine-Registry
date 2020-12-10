@@ -24,73 +24,11 @@
             <input id = "time" name = "time" type="text" class="timepicker">
             <br>
             <input class = "white-text waves-effect navtext btn blue darken-2 hoverable" type="submit" value = "Submit">
+            <p id = "warning-btn" style = "color:red;"></p>
         </form>
     </div>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
-    <script>
-        const name = document.getElementById('name'); 
-        const email = document.getElementById('email');
-        const date = document.getElementById('date');
-        const time = document.getElementById('time');
-        
-        console.log('Name is: ' + name.value);
-        document.addEventListener('DOMContentLoaded', function() {
-            var elems = document.querySelectorAll('.datepicker');
-            var instances = M.Datepicker.init(elems, {
-                autoclose: true, 
-                disableWeekends: true,
-                firstDay: 1,
-                showMonthAfterYear: true, 
-                showDaysInNextAndPreviousMonths: true, 
-                showClearBtn: true,
-            }); 
-          });
-          
-
-          document.addEventListener('DOMContentLoaded', function() {
-            var elems = document.querySelectorAll('.timepicker');
-            var instances = M.Timepicker.init(elems, {
-                showClearBtn: true
-            });
-         });
-
-         async function post(url, data){
-            
-            const response = await fetch(url, {
-                    method: 'POST',
-                    headers: {
-                        'Content-type':'application/json'
-                    },
-                    body: JSON.stringify(data)
-            }); 
-            const resData = await response.json(); 
-            console.log('This is: '+resData);
-            return resData;        
-        }
-
-        document.getElementById('form').addEventListener('submit', function(e){
-            e.preventDefault();
-            console.log('Post function');
-            const data = {
-                name: name.value,
-                email: email.value, 
-                date: date.value, 
-                time: time.value
-            }
-
-            //create post
-            post('http://localhost:5000/register', data)
-            .then(data => console.log(data))
-            .catch(err => console.log(err));
-
-            name.value = '';
-            email.value = '';
-            date.value = '';
-            time.value = '';
-        })
-
-
-    </script>
+    <script src = "js/register.js"> </script>
 </body>
 
 </html>

@@ -3,13 +3,7 @@ const express = require('express'),
     asyncHandler = require('../middleware/async'),
     errorResponse = require('../middleware/error'); 
 
-//@desc      Open the home page
-//@route     GET /
-//@access    Public
-exports.indexPage = (req, res, next) => {
-    res.render('index'); 
-  };
-
+    
 //@desc      Register/make an appointment for vaccine
 //@route     GET /register 
 //@access    Public
