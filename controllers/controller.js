@@ -7,16 +7,16 @@ const express = require('express'),
 //@desc      Register/make an appointment for vaccine
 //@route     GET /register 
 //@access    Public
-exports.register = (req, res, next) => {
+exports.register = asyncHandler((req, res, next) => {
     res.render('register'); 
-  };
+  });
 
 //@desc      FAQ page
 //@route     GET /faq 
 //@access    Public
-exports.faq = (req, res, next) => {
+exports.faq = asyncHandler((req, res, next) => {
   res.render('faq'); 
-};
+});
 
 
 //@desc      create/sign-up a new user, 
@@ -34,23 +34,23 @@ exports.createNewUser = asyncHandler(async(req, res, next) => {
 //@desc      login
 //@route     GET /admin
 //@access    Public
-exports.adminLoginPage = (req, res, next) => {
+exports.adminLoginPage = asyncHandler((req, res, next) => {
     res.render('adminLogin'); 
- };
+ });
 
 //@desc      login credentials 
 //@route     POST /admin
 //@access    Public
-exports.adminLogin = (req, res, next) => {
+exports.adminLogin = asyncHandler((req, res, next) => {
   res.json({success: true, msg: 'You have done it'});
-};
+});
 
 //@desc      admin dashboard
 //@route     GET /admin/dashboard
 //@access    Public
-exports.adminDashboard = (req, res, next) => {
+exports.adminDashboard = asyncHandler((req, res, next) => {
   res.render('adminDashboard'); 
-};
+});
 
 
 

@@ -1,19 +1,28 @@
 [
     {
         "name": "John Doe",
-        "email": "johndoe@gmail.com"
+        "email": "johndoe@gmail.com",
+        "date": "6/11/2020",
+        "time": "something"
+        
     },
     {
         "name": "Elton Smith",
-        "email": "etonsmith@gmail.com"
+        "email": "eltonsmith@gmail.com",
+        "date": "6/11/2020",
+        "time": "something"
     },
     {
         "name": "Beck Safarov",
-        "email": "becksafarov@gmail.com"
+        "email": "becksafarov@gmail.com",
+        "date": "6/11/2020",
+        "time": "something"
     },
     {
         "name": "Admin Adminovich",
-        "email": "becksafarov@gmail.com",
-        "password": "123456"
+        "email": "admin@gmail.com",
+        "password": "123456",
+        "date": "6/11/2020",
+        "time": "something"
     }
 ]

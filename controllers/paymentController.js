@@ -1,33 +1,40 @@
     const paypal = require('paypal-rest-sdk');
     const express = require('express');
-    const ejs = require('ejs');
+    const User = require('../modules/user');
+    const ejs = require('ejs'),
+        asyncHandler = require('../middleware/async'),
+        ErrorResponse = require('../middleware/error');
     
     paypal.configure({
         'mode': 'sandbox', 
-        'client_id': 'AXZFPiMO6_s4ZrbvuI8TUFzVzqk1jXmgu2-aaKCVv5drs1OgQYVH4mcL4RXDUgruj8AAZj1N1wCMfeNG',
-        'client_secret': 'ECXr2o6IZb4z6bharG0NOGYP0h2vAPkbBpvQYS9zvlVLZxlFqcXzX6PIC4QiBjCANQqSHk5PDvFo0KOl'
+        'client_id': `${process.env.CLIENT_ID}`,
+        'client_secret': `${process.env.CLIENT_SECRET}`
     });
 
 
-    //@desc      get pay page, 
-    //@route     GET /pay/
+    //@desc      get pay page 
+    //@route     GET /
     //@access    Public
-    exports.payPage = (req, res, next) => {
+    exports.payPage = asyncHandler(async(req, res, next) => {
         res.render('pay');
-    };
+    });
 
-    //@desc      get pay page, 
-    //@route     POST /pay/
+    //@desc      make payment through Paypal
+    //@route     POST /
     //@access    Public
-    exports.payPalPayment = (req, res, next) => {
+    exports.payPalPayment = asyncHandler(async(req, res, next) => {
+        // const user = await User.findById(req.params.id);
+        // if(!user){
+        //     return next(new ErrorResponse(`Such user not found`, 404));
+        // }
         const create_payment_json = {
             "intent": "sale",
             "payer": {
                 "payment_method": "paypal"
             },
             "redirect_urls": {
-                "return_url": "http://localhost:5000/success",
-                "cancel_url": "http://localhost:5000/cancel"
+                "return_url": "http://localhost:5000/pay/success",
+                "cancel_url": "http://localhost:5000/pay/cancel"
             },
             "transactions": [{
                 "item_list": {
@@ -58,13 +65,13 @@
                 }
             }
         })//end of the paypal.payment function
-    };
+    });
     
 
     //@desc      get success page, 
     //@route     GET /pay/success
     //@access    Public
-    exports.successPage = (req, res, next) => {
+    exports.successPage = asyncHandler(async(req, res, next) => {
         const payerId = req.query.PayerID;
         const paymentId = req.query.paymentId;
       
@@ -87,12 +94,12 @@
               res.render('success');
             }
           });
-    };//end of the successPage
+    });//end of the successPage
 
 
     //@desc      get failed page, 
     //@route     GET /pay/unsuccessful
     //@access    Public
-    exports.errorPage = (req, res, next) => {
+    exports.errorPage = asyncHandler((req, res, next) => {
         res.render('unsuccessful')
-    };
+    });
