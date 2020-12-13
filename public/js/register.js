@@ -39,12 +39,7 @@
             const resData = await response.json();
             return resData;
         }
-        async function get(url){
-            const response = await fetch(url); 
-            const resData = await response.json(); 
-            return resData; 
-         }//end of the get function 
-
+        
         //make post request with data
         document.getElementById('form').addEventListener('submit', function(e){
             e.preventDefault();
@@ -55,12 +50,12 @@
                 time: time.value
             }
 
-            post('http://localhost:5000/register', data)
+            post(`${process.env.URL}/register`, data)
             .then(data => {
                 if(data.success == false){
                     warningBtn.innerHTML = data.error; 
                 }else{
-                    window.location.href = "http://localhost:5000/pay";
+                    window.location.href = `${process.env.URL}/pay/${data.data._id}`;
                     warningBtn.innerHTML = '';
                     // name.value = '';
                     // email.value = '';

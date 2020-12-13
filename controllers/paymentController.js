@@ -13,28 +13,33 @@
 
 
     //@desc      get pay page 
-    //@route     GET /
+    //@route     GET /pay/:id
     //@access    Public
     exports.payPage = asyncHandler(async(req, res, next) => {
+        const user = await User.findById(req.params.id);
+        if(!user){
+            return next(new ErrorResponse(`Such user not found`, 404));
+        }
+        let url = `/pay/${req.params.id}`; 
         res.render('pay');
     });
 
     //@desc      make payment through Paypal
-    //@route     POST /
+    //@route     POST /pay/:id
     //@access    Public
     exports.payPalPayment = asyncHandler(async(req, res, next) => {
-        // const user = await User.findById(req.params.id);
-        // if(!user){
-        //     return next(new ErrorResponse(`Such user not found`, 404));
-        // }
+        const user = await User.findById(req.params.id);
+        if(!user){
+            return next(new ErrorResponse(`Such user not found`, 404));
+        }
         const create_payment_json = {
             "intent": "sale",
             "payer": {
                 "payment_method": "paypal"
             },
             "redirect_urls": {
-                "return_url": "http://localhost:5000/pay/success",
-                "cancel_url": "http://localhost:5000/pay/cancel"
+                "return_url": `http://localhost:5000/pay/success/${req.params.id}`,
+                "cancel_url": "http://localhost:5000/pay/error"
             },
             "transactions": [{
                 "item_list": {
@@ -69,11 +74,12 @@
     
 
     //@desc      get success page, 
-    //@route     GET /pay/success
+    //@route     GET /pay/success/:id
     //@access    Public
     exports.successPage = asyncHandler(async(req, res, next) => {
         const payerId = req.query.PayerID;
         const paymentId = req.query.paymentId;
+        const userId = req.params.id;
       
         const execute_payment_json = {
             "payer_id": payerId,
@@ -98,7 +104,7 @@
 
 
     //@desc      get failed page, 
-    //@route     GET /pay/unsuccessful
+    //@route     GET /pay/error
     //@access    Public
     exports.errorPage = asyncHandler((req, res, next) => {
         res.render('unsuccessful')

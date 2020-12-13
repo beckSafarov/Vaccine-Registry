@@ -8,8 +8,9 @@ const express = require('express'),
     } = require('../controllers/paymentController.js');
   
 
-router.route('/').get(payPage).post(payPalPayment); 
-router.route('/success').get(successPage); 
+
+router.route('/:id').get(payPage).post(payPalPayment); 
+router.route('/success/:id').get(successPage); 
 router.route('/error').get(errorPage); 
 
 
