@@ -19,16 +19,18 @@
                 <input id = "email" type="email" name="email" id="email" required>
             </div>
             <label for="date">Date</label>
-            <input id = "date" name = "date" type="text" class = "datepicker">
+            <input id = "date" name = "date" type="text" class = "datepicker" required>
             <label for="time">Time</label>
-            <input id = "time" name = "time" type="text" class="timepicker">
+            <input id = "time" name = "time" type="text" class="timepicker" required>
+            <label for="time">Number of vaccines</label>
+            <input id = "number" name = "number" type="number" required>
             <br>
             <input class = "white-text waves-effect navtext btn blue darken-2 hoverable" type="submit" value = "Submit">
             <p id = "warning-btn" style = "color:red;"></p>
         </form>
     </div>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
-    <script src = "js/register.js"> </script>
+    <script src = "http://localhost:5000/js/register.js"> </script>
 </body>
 
 </html>

@@ -1,9 +1,9 @@
     const paypal = require('paypal-rest-sdk');
     const express = require('express');
     const User = require('../modules/user');
-    const ejs = require('ejs'),
-        asyncHandler = require('../middleware/async'),
-        ErrorResponse = require('../middleware/error');
+    const ejs = require('ejs');
+    const asyncHandler = require('../middleware/async');
+    const ErrorResponse = require('../middleware/error');
     
     paypal.configure({
         'mode': 'sandbox', 
@@ -18,10 +18,12 @@
     exports.payPage = asyncHandler(async(req, res, next) => {
         const user = await User.findById(req.params.id);
         if(!user){
-            return next(new ErrorResponse(`Such user not found`, 404));
+            return next(
+                new ErrorResponse(`Such user not found`, 404)
+                );
         }
-        let url = `/pay/${req.params.id}`; 
-        res.render('pay');
+        
+        res.render('pay', {amount: user.number});
     });
 
     //@desc      make payment through Paypal
@@ -32,6 +34,7 @@
         if(!user){
             return next(new ErrorResponse(`Such user not found`, 404));
         }
+        const totalPrice = parseInt(user.number) * 50; 
         const create_payment_json = {
             "intent": "sale",
             "payer": {
@@ -46,16 +49,16 @@
                     "items": [{
                         "name": "H01 vaccine",
                         "sku": "001",
-                        "price": "25.00",
+                        "price": `${totalPrice}`,
                         "currency": "USD",
                         "quantity": 1
                     }]
                 },
                 "amount": {
                     "currency": "USD",
-                    "total": "25.00"
+                    "total": `${totalPrice}`
                 },
-                "description": "Vaccine for those who believe in covid 19"
+                "description": "Vaccine for those who fear covid 19"
             }]
         };//end of the create payment json 
 
@@ -79,14 +82,18 @@
     exports.successPage = asyncHandler(async(req, res, next) => {
         const payerId = req.query.PayerID;
         const paymentId = req.query.paymentId;
-        const userId = req.params.id;
-      
+        const user = await User.findById(req.params.id);
+        const totalPrice = parseInt(user.number) * 50; 
+        const paymentDetails = {
+            payerId,
+            paymentId
+        }
         const execute_payment_json = {
             "payer_id": payerId,
             "transactions": [{
               "amount": {
                 "currency": "USD",
-                "total": "25"
+                "total": `${totalPrice}`
               }
             }]
           };
@@ -97,7 +104,10 @@
               throw error; 
             }else{
               console.log(JSON.stringify(payment)); 
-              res.render('success');
+              res.render('success', {
+                  user: user,
+                  payment: paymentDetails
+                });
             }
           });
     });//end of the successPage

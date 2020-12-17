@@ -1,7 +1,7 @@
 const payBtn = document.getElementById('payBtn'); 
 const form = document.getElementById('form'); 
 const warningBtn = document.getElementById('warningBtn'); 
-alert('it should work');
+
 form.action = window.location.href; 
 form.method = "POST"; 
 console.log(window.location.href);

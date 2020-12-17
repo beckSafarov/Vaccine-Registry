@@ -25,6 +25,10 @@ const userSchema = new mongoose.Schema({
     time: {
       required: true, 
       type: String
+    },
+    number: {
+      required: true, 
+      type: Number
     }
 })
 

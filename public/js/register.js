@@ -2,9 +2,8 @@
         const email = document.getElementById('email');
         const date = document.getElementById('date');
         const time = document.getElementById('time');
+        const number = document.getElementById('number');
         const warningBtn = document.getElementById('warning-btn');
-        let status = false; 
-
         //date picker
         document.addEventListener('DOMContentLoaded', function() {
             var elems = document.querySelectorAll('.datepicker');
@@ -39,7 +38,7 @@
             const resData = await response.json();
             return resData;
         }
-        
+
         //make post request with data
         document.getElementById('form').addEventListener('submit', function(e){
             e.preventDefault();
@@ -47,15 +46,16 @@
                 name: name.value,
                 email: email.value,
                 date: date.value,
-                time: time.value
+                time: time.value,
+                number: number.value,
             }
 
-            post(`${process.env.URL}/register`, data)
+            post(`http://localhost:5000/register`, data)
             .then(data => {
                 if(data.success == false){
-                    warningBtn.innerHTML = data.error; 
+                    warningBtn.innerHTML = data.error;
                 }else{
-                    window.location.href = `${process.env.URL}/pay/${data.data._id}`;
+                    window.location.href = `http://localhost:5000/pay/${data.data._id}`;
                     warningBtn.innerHTML = '';
                     // name.value = '';
                     // email.value = '';
@@ -66,8 +66,3 @@
             })
             .catch(err => console.log(err));
         })//end of the form function
-
-        
-
-
-        

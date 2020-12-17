@@ -14,12 +14,19 @@
 <body>
     <div class="container">
         <h2>This is the page where you pay for the vaccine</h2>
+        <p><strong>Price per vaccine:</strong> $50 </p>
+        <p><strong>Number of vaccines:</strong> <%= amount %> </p>
+        <p id = "totalpayment"><strong>Total to pay:</strong> $50</p>
         <form id = "form">
-            <button id = "payBtn" class = "white-text waves-effect waves-light navtext btn blue darken-2 hoverable">Paypal</button>
+            <button id = "payBtn" class = "white-text waves-effect waves-light navtext btn blue darken-2 hoverable"><img src="img/paypal-logo.png" alt="Paypal"></button>
         </form>
     </div>
     <p id = "warnBtn" style = "color:red;"></p>
-    
+    <script>
+        const totalPayment = document.getElementById('totalpayment'); 
+        const total = parseInt('<%= amount %>') * 50; 
+        totalPayment.innerHTML = `<strong>Total payment:</strong> $${total}`;
+    </script>
     <script src = "https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
     <script src = 'http://localhost:5000/js/pay.js'></script>
 </body>
