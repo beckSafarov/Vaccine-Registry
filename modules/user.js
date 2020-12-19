@@ -26,6 +26,10 @@ const userSchema = new mongoose.Schema({
       required: true, 
       type: String
     },
+    paid: {
+      type: Boolean,
+      default: false
+    },
     number: {
       required: true, 
       type: Number
@@ -37,5 +41,6 @@ userSchema.pre('save', function (next) {
     this.slug = slugify(this.name, { lower: true });
     next();
   });
+
 
 module.exports = mongoose.model('user', userSchema);

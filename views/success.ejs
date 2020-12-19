@@ -18,20 +18,41 @@
     <div class="container">
         <p><strong>Name:</strong> <%= user.name %> </p>
         <p><strong>Email:</strong> <%= user.email %> </p>
-        <p><strong>Date of appointment:</strong> <%= user.date %> </p>
-        <p><strong>Time of appointment:</strong> <%= user.time %> </p>
+        <p><strong>Date of appointment:</strong> <%= user.date.toDateString() %> </p>
+        <p id = "usertime"><strong>Time of appointment:</strong> <%= user.time %> </p>
         <p><strong>Number of vaccines bought:</strong> <%= user.number %> </p>
         <p id = "totalpayed"><strong>Overall payed:</strong> $50 </p>
         <p><strong>Payer ID:</strong> <%= payment.payerId %> </p>
         <p><strong>Payment ID:</strong> <%= payment.paymentId %> </p>
+        <p id = "today"><strong>Payment Date:</strong> <%= payment.paymentId %> </p>
     <br>
-    <p>Copy of transcript should be sent at your email at <em><%= user.email %></em> </p>
+    <p>Copy of transcript should be sent at your email at <strong><%= user.email %></strong> </p>
     </div>
     
     
     <script>
         const totalpayed = parseInt('<%=user.number%>') * 50; 
-        document.getElementById('totalpayed').innerHTML = `<em>Total payed:</em> $${totalpayed}`;
+        document.getElementById('totalpayed').innerHTML = `<strong>Total payed:</strong> $${totalpayed}`;
+
+        const today = new Date(); 
+        document.getElementById('today').innerHTML = `<strong>Payment Date:</strong> ${today} `;
+
+        //changing 19:30 to 7:30 PM 
+        const userTime = `<%= user.time %>`;
+        let identifier; 
+        let hour = parseInt(userTime.slice(0,2));
+        let minutes = userTime.slice(3,5);
+        if(hour>12){
+            hour -=12; 
+            identifier = `PM`; 
+        }else if(hour = 12){
+            identifier = `PM`; 
+        }else{
+            identifier = 'AM'; 
+        }
+
+        document.getElementById('usertime').innerHTML = `<strong>Time of appointment:</strong> ${hour}:${minutes} ${identifier}`;
+
     </script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
 </body>

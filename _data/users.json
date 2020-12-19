@@ -3,7 +3,7 @@
         "name": "John Doe",
         "email": "johndoe@gmail.com",
         "date": "6/11/2020",
-        "time": "something",
+        "time": "10:00",
         "number": 1
         
     },
@@ -11,14 +11,16 @@
         "name": "Elton Smith",
         "email": "eltonsmith@gmail.com",
         "date": "6/11/2020",
-        "time": "something",
+        "time": "10:00",
+        "paid": true,
         "number": 1
+        
     },
     {
         "name": "Beck Safarov",
         "email": "becksafarov@gmail.com",
         "date": "6/11/2020",
-        "time": "something",
+        "time": "10:00",
         "number": 1
     },
     {
@@ -26,7 +28,7 @@
         "email": "admin@gmail.com",
         "password": "123456",
         "date": "6/11/2020",
-        "time": "something",
+        "time": "10:00",
         "number": 1
     }
 ]

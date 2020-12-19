@@ -21,9 +21,29 @@
           document.addEventListener('DOMContentLoaded', function() {
             var elems = document.querySelectorAll('.timepicker');
             var instances = M.Timepicker.init(elems, {
+                twelveHour: false,
                 showClearBtn: true
             });
          });
+
+         //function to join the date and time strings and create one date variable
+         const dateFormat = (date, time)=>{
+            let month = date.slice(0, 3); 
+            const day = parseInt(date.slice(4, 6)); 
+            const year = parseInt(date.slice(8, 12)); 
+            const timeValues = time.split(':');
+            let hour = timeValues[0]; 
+            let minutes = timeValues[1]; 
+            const monthNames = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+            for(let i = 0; i<monthNames.length; i++){
+                if(month = monthNames[i]){
+                    month = i; 
+                }
+            }
+            month = parseInt(month); 
+            
+            return new Date(year, month, day, hour, minutes);  
+        }
 
          //post function to make a post request to the server
          async function post(url, data){
@@ -43,11 +63,11 @@
         document.getElementById('form').addEventListener('submit', function(e){
             e.preventDefault();
             const data = {
-                name: name.value,
-                email: email.value,
-                date: date.value,
-                time: time.value,
-                number: number.value,
+                name: name.value.trim(),
+                email: email.value.trim(),
+                date: date.value.trim(),
+                time: time.value.trim(),
+                number: number.value.trim(),
             }
 
             post(`http://localhost:5000/register`, data)
@@ -57,12 +77,10 @@
                 }else{
                     window.location.href = `http://localhost:5000/pay/${data.data._id}`;
                     warningBtn.innerHTML = '';
-                    // name.value = '';
-                    // email.value = '';
-                    // date.value = '';
-                    // time.value = '';
                 }
 
             })
             .catch(err => console.log(err));
         })//end of the form function
+        
+        

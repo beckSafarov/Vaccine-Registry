@@ -30,7 +30,7 @@
     //@route     POST /pay/:id
     //@access    Public
     exports.payPalPayment = asyncHandler(async(req, res, next) => {
-        const user = await User.findById(req.params.id);
+        let user = await User.findById(req.params.id);
         if(!user){
             return next(new ErrorResponse(`Such user not found`, 404));
         }
@@ -98,12 +98,14 @@
             }]
           };
           
-        paypal.payment.execute(paymentId, execute_payment_json, function (error, payment){
+        paypal.payment.execute(paymentId, execute_payment_json, async function (error, payment){
             if(error){
               console.log(error.response);
               throw error; 
             }else{
               console.log(JSON.stringify(payment)); 
+              user.paid = true; 
+              await user.save(); 
               res.render('success', {
                   user: user,
                   payment: paymentDetails
@@ -114,8 +116,9 @@
 
 
     //@desc      get failed page, 
-    //@route     GET /pay/error
+    //@route     GET /pay/error/:id
     //@access    Public
-    exports.errorPage = asyncHandler((req, res, next) => {
-        res.render('unsuccessful')
+    exports.errorPage = asyncHandler(async(req, res, next) => {
+        const user = await User.findById(req.params.id);
+        res.render('unsuccessful', {user: user}); 
     });
