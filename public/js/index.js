@@ -1,13 +1,13 @@
-        const sidenav = document.querySelector('.sidenav'); 
-        M.Sidenav.init(sidenav, {});  
+        const sidenav = document.querySelector('.sidenav');
+        M.Sidenav.init(sidenav, {});
 
 
         document.addEventListener('DOMContentLoaded', function() {
             var elems = document.querySelectorAll('.slider');
             var instances = M.Slider.init(elems, {
-                indicators: false, 
+                indicators: false,
                 height: 780,
-                transition: 500, 
+                transition: 500,
                 interval: 4000
             });
         });
