@@ -215,22 +215,24 @@
               <p>If you have any questions or offers, you can contact us </p>
               <br>
               <div class="card-panel grey lighten-4">
-                <div class="input-field">
-                  <input type="text"  id="first_name" class="validate">
-                  <label for="first_name">Name</label>
-                </div>
-               <div class="input-field">
-                 <input type="email"  id="email" class="validate">
-                 <label for="email">Email</label>
-               </div>
-               <div class="input-field">
-                 <textarea name="" id="textarea" class="materialize-textarea"></textarea>
-                 <label for="textarea">Message</label>
-               </div>
- 
-               <button class="btn waves-effect waves-light" type="submit" name="action">Submit
-                 <i class="material-icons right">send</i>
-               </button>
+                <form id = 'form' action = 'email' method = 'POST'>
+                  <div class="input-field">
+                    <input name = "firstname" type="text"  id="first_name" class="validate" required>
+                    <label for="firstname">Name</label>
+                  </div>
+                 <div class="input-field">
+                   <input name = "email" type="email"  id="email" class="validate" required>
+                   <label for="email">Email</label>
+                 </div>
+                 <div class="input-field">
+                   <textarea name="message" id="textarea" class="materialize-textarea" required></textarea>
+                   <label for="message">Message</label>
+                 </div>
+                 <button class="btn waves-effect waves-light" type="submit" name="action">Submit
+                   <i class="material-icons right">send</i>
+                 </button>
+                </form>
+                <p id="warning-btn" color = "<%= result.color %> "><%= result.message %> </p>
               </div>
         
               
@@ -262,7 +264,11 @@
 
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
-    
+    <script>
+      let root = `<%=root%>`;
+      localStorage.setItem('root', root); 
+      
+    </script>
     <script src = "js/index.js"> </script>
 </body>
 </html>

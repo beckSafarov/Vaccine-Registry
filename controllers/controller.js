@@ -3,19 +3,29 @@ const express = require('express'),
     asyncHandler = require('../middleware/async'),
     errorResponse = require('../middleware/error'); 
 
+//@desc      Index Page
+//@route     GET /
+//@access    Public
+exports.indexPage = asyncHandler((req, res, next) => {
+  res.render('index', {
+    result: '',
+    color: 'black',
+    root: process.env.root
+  }); 
+});
     
 //@desc      Register/make an appointment for vaccine
 //@route     GET /register 
 //@access    Public
 exports.register = asyncHandler((req, res, next) => {
-    res.render('register'); 
+    res.render('register', {root: process.env.root}); 
   });
 
 //@desc      FAQ page
 //@route     GET /faq 
 //@access    Public
 exports.faq = asyncHandler((req, res, next) => {
-  res.render('faq'); 
+  res.render('faq', {root: process.env.root}); 
 });
 
 
@@ -35,7 +45,7 @@ exports.createNewUser = asyncHandler(async(req, res, next) => {
 //@route     GET /admin
 //@access    Public
 exports.adminLoginPage = asyncHandler((req, res, next) => {
-    res.render('adminLogin'); 
+    res.render('adminLogin', {root: process.env.root}); 
  });
 
 //@desc      login credentials 
@@ -49,7 +59,7 @@ exports.adminLogin = asyncHandler((req, res, next) => {
 //@route     GET /admin/dashboard
 //@access    Public
 exports.adminDashboard = asyncHandler((req, res, next) => {
-  res.render('adminDashboard'); 
+  res.render('adminDashboard', {root: process.env.root}); 
 });
 
 

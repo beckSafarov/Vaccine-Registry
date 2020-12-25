@@ -4,6 +4,8 @@
         const time = document.getElementById('time');
         const number = document.getElementById('number');
         const warningBtn = document.getElementById('warning-btn');
+        const root = localStorage.getItem('root'); 
+        console.log(root); 
         //date picker
         document.addEventListener('DOMContentLoaded', function() {
             var elems = document.querySelectorAll('.datepicker');
@@ -70,12 +72,12 @@
                 number: number.value.trim(),
             }
 
-            post(`http://localhost:5000/register`, data)
+            post(`${root}/register`, data)
             .then(data => {
                 if(data.success == false){
                     warningBtn.innerHTML = data.error;
                 }else{
-                    window.location.href = `http://localhost:5000/pay/${data.data._id}`;
+                    window.location.href = `${root}/pay/${data.data._id}`;
                     warningBtn.innerHTML = '';
                 }
 

@@ -12,11 +12,11 @@
         <form id = "form">
             <div class="input-field">
                 <label for="name">Enter your name</label>
-                <input id = "name" type="text" name="name" id="name" required>
+                <input id = "name" type="text" name="name" required>
             </div>
             <div class="input-field">
                 <label for="email">Enter your email</label>
-                <input id = "email" type="email" name="email" id="email" required>
+                <input id = "email" type="email" name="email" required>
             </div>
             <label for="date">Date</label>
             <input id = "date" name = "date" type="text" class = "datepicker" required>
@@ -30,7 +30,13 @@
         </form>
     </div>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
-    <script src = "http://localhost:5000/js/register.js"> </script>
+    <script src = "<%= root %>/js/register.js"> </script>
+    <script>
+        const root1 = '<%= root %>'; 
+        localStorage.setItem('root', root1); 
+        form.action = 'email'; 
+        form.post = 'POST'; 
+    </script>
 </body>
 
 </html>

@@ -5,6 +5,7 @@
     const asyncHandler = require('../middleware/async');
     const ErrorResponse = require('../middleware/error');
     
+    
     paypal.configure({
         'mode': 'sandbox', 
         'client_id': `${process.env.CLIENT_ID}`,
@@ -41,8 +42,8 @@
                 "payment_method": "paypal"
             },
             "redirect_urls": {
-                "return_url": `http://localhost:5000/pay/success/${req.params.id}`,
-                "cancel_url": "http://localhost:5000/pay/error"
+                "return_url": `${process.env.root}/pay/success/${req.params.id}`,
+                "cancel_url": `${process.env.root}/pay/error`
             },
             "transactions": [{
                 "item_list": {

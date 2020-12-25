@@ -4,9 +4,9 @@ Vaccine Registry website for an imaginary hospital called Innovative Medical Aid
 
 - Version 0.5
 
-## Requirements
+## Usage
 
-1. Make sure to change the config.env.env file to config.env and enter your own values.
+1. Make sure to change the "config/config.env.env" file to "config/config.env" and enter your own values.
 
 2. Install dependencies
 
