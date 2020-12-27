@@ -1,5 +1,8 @@
 const mongoose = require('mongoose');
 const slugify = require('slugify');
+const crypto = require('crypto'); 
+const bcrypt = require('bcryptjs');
+const jwt = require('jsonwebtoken');
 
 const userSchema = new mongoose.Schema({
     name: {
@@ -9,10 +12,6 @@ const userSchema = new mongoose.Schema({
         maxlength: [30, 'Name cannot be more than 30 characters'],
       },
     slug: String,
-    password: {
-        type: String, 
-        select: false
-    },
     email: {
         type: String,
         required: [true, 'Please add an email'],
@@ -42,5 +41,9 @@ userSchema.pre('save', function (next) {
     next();
   });
 
+//sign JWT and return
+userSchema.methods.getSignedJwtToken = function () {
+  return jwt.sign({ id: this._id }, process.env.JWT_SECRET);
+};
 
 module.exports = mongoose.model('user', userSchema);

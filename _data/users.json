@@ -22,13 +22,5 @@
         "date": "6/11/2020",
         "time": "10:00",
         "number": 1
-    },
-    {
-        "name": "Admin Adminovich",
-        "email": "admin@gmail.com",
-        "password": "123456",
-        "date": "6/11/2020",
-        "time": "10:00",
-        "number": 1
     }
 ]

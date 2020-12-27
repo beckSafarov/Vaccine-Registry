@@ -71,3 +71,4 @@ async function post(url, data){
     const resData = await response.json();
     return resData;
 }
+
