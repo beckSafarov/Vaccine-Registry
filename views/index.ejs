@@ -3,17 +3,17 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-   
+
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <!--skeleton link -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/skeleton/2.0.4/skeleton.css" 
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/skeleton/2.0.4/skeleton.css"
     integrity="sha512-5fsy+3xG8N/1PV5MIJz9ZsWpkltijBI48gBzQ/Z2eVATePGHOkMIn+xTDHIfTZFVb9GMpflF2wOWItqxAP2oLQ==" crossorigin="anonymous" />
 
      <!--materialize css link, funny huh?-->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@600&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Alegreya+Sans:wght@300&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=BioRhyme:wght@200&family=Frank+Ruhl+Libre&family=Spectral:wght@300&family=Varela+Round&display=swap" rel="stylesheet"> 
+    <link href="https://fonts.googleapis.com/css2?family=BioRhyme:wght@200&family=Frank+Ruhl+Libre&family=Spectral:wght@300&family=Varela+Round&display=swap" rel="stylesheet">
     <link rel="icon" href=”assets/img/IMALogo.png” sizes="16x16">
     <script defer src="https://use.fontawesome.com/releases/v5.0.9/js/all.js" integrity="sha384-8iPTk2s/jMVj81dnzb/iFR2sdA7u06vHJyyLlAd4snFpCl/SnyUjRrbdJsw1pGIl"
     crossorigin="anonymous"></script>
@@ -31,7 +31,6 @@
                     <a href="#" class = "black-text sidenav-trigger" data-target = "mobile-nav">
                         <i class="fas fa-bars fa-2x"></i>
                     </a>
-                    
                     <ul class="right hide-on-med-and-down black-text">
                         <li>
                             <a class = "black-text waves-effect navtext" href="#home">Home</a>
@@ -49,11 +48,11 @@
                           <form action="/register" method = "GET">
                             <button class = "white-text waves-effect waves-light navtext btn blue darken-2 hoverable" >Get Vaccine</button>
                          </form>
-                         
+
                        </li>
                     </ul>
 
-                    
+
                 </div>
             </div>
         </nav>
@@ -68,7 +67,7 @@
         <li><form action="/register" method = "GET"><button class = "white-text center-align btn blue darken-2" style = "margin-left: 20px;">Get Vaccine</button></form></li>
     </ul>
 
-    
+
     <!--2. Slider-->
   <div class="slider">
     <ul class="slides">
@@ -108,15 +107,15 @@
               <img class = "about-image z-depth-4" src="https://i.ibb.co/8BzVjvX/zaharlar.jpg" height="500" width="400" alt="Manager">
             </div>
             <div class="col s12 m6">
-               
+
                   <p class = "flow-text grey-text text-darken-3">Lorem ipsum dolor sit amet consectetur adipisicing elit. Nesciunt cum itaque mollitia assumenda, a accusamus reiciendis quia omnis voluptatum delectus autem voluptates aut qui, ab quaerat nisi unde rerum sunt minus architecto exercitationem illum vero obcaecati nam. <br><br>Recusandae dolorum quo aperiam ut necessitatibus itaque, mollitia totam ex aut libero veniam cum tempore doloribus perferendis excepturi quis placeat officia nostrum? Incidunt similique temporibus voluptates, esse deleniti rem consectetur voluptate accusamus fugit voluptatum distinctio.</p>
                   <a id = "full-story-link" href="#" class = "waves-effect blue-text text-darken-2">READ MORE <i class="fas fa-chevron-right"></i></a>
-                
+
             </div>
           </div>
       </div>
   </section>
-      
+
 
   <!--5. Why Us? -->
   <section id="whyus" class="section section-whyus scrollspy">
@@ -124,7 +123,7 @@
       <h2 class="heading center grey-text text-darken-3">Why Us?</h2>
       <br><br>
       <!--our features-->
-     
+
         <div class="row">
           <div class="col s6 m3 center-align">
             <img src = "https://i.ibb.co/4YYvbvd/reliable.png" height = 70 width = 90>
@@ -190,12 +189,12 @@
             <p class = "blue-text text-darken-2">John Doe, Weird Inc</p>
             <p> <em>I am a busy person. I did not want to waste my team in the hospital. IMA came for help and I feel good now</em></p>
           </div>
-        </div> 
+        </div>
       </div>
     </div>
 
-  
-  </section> 
+
+  </section>
 
 
   <!--6. Contact Section-->
@@ -208,12 +207,11 @@
               <p><i class="fas fa-map-marker"></i> Penang, Malaysia</p>
               <p><i class="fas fa-envelope"></i> Email: contact@ima-vaccine.com</p>
               <img class = "hide-on-med-and-down" src="https://i.ibb.co/mRQ74Mm/hi.jpg" alt="Our Team" width= "350", height ="350">
-              
+
           </div>
           <div class="col s12 m6">
             <br>
               <p>If you have any questions or offers, you can contact us </p>
-              <br>
               <div class="card-panel grey lighten-4">
                 <form id = 'form' action = 'email' method = 'POST'>
                   <div class="input-field">
@@ -232,10 +230,23 @@
                    <i class="material-icons right">send</i>
                  </button>
                 </form>
-                <p id="warning-btn" color = "<%= result.color %> "><%= result.message %> </p>
+                <p id="warning-btn"></p>
+                <div class="center-align">
+                  <div id = "spinner" class="preloader-wrapper small">
+                    <div class=" spinner-layer spinner-blue-only">
+                      <div class="circle-clipper left">
+                        <div class="circle"></div>
+                      </div><div class="gap-patch">
+                        <div class="circle"></div>
+                      </div><div class="circle-clipper right">
+                        <div class="circle"></div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
               </div>
-        
-              
+
+
           </div>
       </div>
     </div>
@@ -257,17 +268,17 @@
       <div>
         <p class = "white-text" style="margin-top: 40px; font-size: 12px;">Innovative Medical Aid &copy 2020. All rights reserved</p>
       </div>
-      
+
 
   </footer>
-  
+
 
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
     <script>
       let root = `<%=root%>`;
-      localStorage.setItem('root', root); 
-      
+      localStorage.setItem('root', root);
+
     </script>
     <script src = "js/index.js"> </script>
 </body>

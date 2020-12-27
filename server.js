@@ -5,9 +5,8 @@ const express = require('express'),
   morgan =require('morgan'),
   colors = require('colors'),
   errorHandler = require('./middleware/error'),
+  emailConfirmation = require('./utils/emailConfirmation');
   PORT = process.env.PORT || 5000;
-
-
 
 //load env vars
 dotenv.config({ path: './config/config.env' });
@@ -15,21 +14,21 @@ app.set('view engine', 'ejs');
 //Body parser
 app.use(express.json());
 
-//the next set of declarations 
+//the next set of declarations
 const routes = require('./routes/routes'),
   payRoutes = require('./routes/payRoutes'),
   emailRoutes = require('./routes/emailRoutes'),
   connectDB = require('./config/db'); //connecting the database
 
-connectDB(); 
+connectDB();
 
 //set static folder
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', routes);  //mounting routes
 app.use('/pay', payRoutes);
-app.use('/email', emailRoutes); 
-app.use(errorHandler); 
+app.use('/email', emailRoutes);
+app.use(errorHandler);
 
 
 
