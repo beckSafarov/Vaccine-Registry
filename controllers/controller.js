@@ -39,57 +39,24 @@ exports.createNewUser = asyncHandler(async(req, res, next) => {
   });
 });
 
-//@desc      login page
-//@route     GET /admin
-//@access    Public
-exports.adminLoginPage = asyncHandler((req, res, next) => {
-    res.render('adminLogin', {root: process.env.root});
- });
 
-
-//@desc      admin credentials
-//@route     POST /admin
-//@access    Public
-exports.adminLogin = asyncHandler((req, res, next) => { 
-  const {email, pass} = req.body;
-  const user = User.find({email: email}).exec(); 
-    if(email !== process.env.ADMIN_EMAIL || pass !== process.env.ADMIN_PASSWORD){
-        res.status(400).json({
-          success: false,
-          error: 'Invalid Credentials',
-          data: req.body
-        })
-    }else{
-        sendTokenResponse(pass, 200, res); 
-    }
-});
-
-//@desc      admin dashboard
-//@route     GET /admin/home
+//@desc      get appointments,
+//@route     POST /api/data
 //@access    Private
-exports.adminHome = asyncHandler(async(req, res, next)=>{
-   console.log('adminHome controller is running...');
-   res.render('adminHome', {root: process.env.root}); 
-   res.redirect('/home');
+exports.getData = asyncHandler(async(req, res, next) => {
+   const users = await User.find({paid: true}).sort({date: 1}).exec(); 
+
+   if(req.body.code !== process.env.DATA_SECRET){
+      res.status(401).json({
+        success: false, 
+        error: 'Access denied',
+        received: req.body.code,
+        code: process.env.DATA_SECRET
+      })
+   }else{
+      res.status(200).json({
+        success: true, 
+        data: users
+      })
+   }
 });
-
- //get token from model, create cookie and send response
- const sendTokenResponse = (password, statusCode, res) => {
-  //create token
-  const token = jwt.sign({pass: password}, process.env.JWT_SECRET),
-  options = {
-      httpOnly: true,
-  };
-
-  if (process.env.NODE_ENV === 'production') {
-    options.secure = true;
-  }
-
-  res.status(statusCode).cookie('token', token, options).json({
-    success: true,
-    token
-  });
-};
-
-
-

@@ -2,12 +2,10 @@ const form = document.getElementById('form');
 const email = document.getElementById('email');
 const password = document.getElementById('password');
 const warningBtn = document.getElementById('warning-btn');
-// console.log(`${root}/admin`);
+const root = `${location.protocol}//${location.host}`;
 
 
-// document.addEventListener('DOMContentLoaded', function(){
-//     checkHeaders(); 
-// }); 
+document.addEventListener('DOMContentLoaded', checkHeaders); 
 
 //post function to make a post request to the server
  async function post(url, data){
@@ -37,15 +35,12 @@ form.addEventListener('submit', async function(e){
             if(!response.success){
                 warningBtn.innerHTML = response.error;
                 warningBtn.style.color = 'red';
-                // console.log(newData);
-                console.log('(C) from server');
             }else{ 
                 console.log('received successful message...')
-                // warningBtn.innerHTML = `Login successful. Grab your token: ${response.token}`; 
-                // warningBtn.style.color = 'green';
-                // document.cookie = "token" + "=" + response.token + ";";
-                // console.log(document.cookie);
-                getHomePage(response.token); 
+                warningBtn.innerHTML = `Login successful. Grab your token: ${response.token}`;
+                localStorage.setItem('token', response.token);   
+                warningBtn.style.color = 'green';
+                window.location.href = `${root}/admin/${response.token}/home`; 
             }
         })
         .catch(err => {
@@ -57,41 +52,28 @@ form.addEventListener('submit', async function(e){
 })
 
 
-async function getHomePage(token){
+async function getHomePage(){
+    const token = localStorage.getItem('token'); 
     console.log('getHomePage runs...');
-    await fetch(`${root}/admin/home`, {
-        method: 'get',
-        headers: {
-            'Authorization': `Bearer ${token}`
+    var xhttp = new XMLHttpRequest(); 
+    xhttp.open("GET", `${root}/admin/home`, true);
+    xhttp.setRequestHeader("Authorization", `Bearer ${token}`);
+    xhttp.onload = function(){
+        console.log('Onload function...')
+        if(this.status===200){
+            window.location.href = `${root}/admin/dashboard`;
         }
-    });
-
-    // const resData = await response; 
-    // console.log(response);
-    // if(!response.ok){
-    //     warningBtn.innerHTML = response.error;
-    //     warningBtn.style.color = 'red';
-    // }else{
-    //     window.location.href = response.url; 
-    // }
+    xhr.onerror = function(){
+        console.log('Request error...'); 
+    } //in case if error happens to let the user know 
+    xhttp.send();
+    }
 }
 
 async function checkHeaders(){
-    if(document.cookie){
-        console.log(document.cookie.token); 
-        await fetch(`${root}/admin/home`, {
-            method: 'get',
-            headers: {
-                'Authorization': `Bearer ${document.cookie}`
-            }
-        });
-        // const resData = await response; 
-        // console.log(response);
-        // if(response.ok){
-        //     window.location.href = response.url; 
-        // }
-    }else{
-        console.log('could not find cookie');
-        console.log(document); 
+    const token = localStorage.getItem('token'); 
+    if(token){
+       location.replace(`${root}/admin/${token}/home`);
     }
-}//end of the function 
+    
+}//end of the checkHeaders function 

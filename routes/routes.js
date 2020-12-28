@@ -6,17 +6,22 @@ const express = require('express'),
       register,
       faq,
       createNewUser,
+      getData
+    } = require('../controllers/controller'),
+    {
       adminLoginPage,
       adminLogin,
       adminHome
-    } = require('../controllers/controller');
+    } = require('../controllers/adminController');
+
 
 
 router.route('/').get(indexPage);
 router.route('/register').get(register).post(createNewUser);
 router.route('/faq').get(faq);
 router.route('/admin').get(urlDirect, adminLoginPage).post(adminLogin); 
-router.get('/admin/home', protect, adminHome); 
+router.get('/admin/:code/home', protect, adminHome); 
+router.post('/api/data', getData); 
 // router.route('/admin').get(adminLoginPage).post(adminLogin);
 // router.route('/admin/dashboard').get(adminDashboard);
 

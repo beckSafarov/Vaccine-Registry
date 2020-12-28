@@ -4,7 +4,7 @@ const email = document.getElementById('email');
 const message = document.getElementById('textarea');
 const warningBtn = document.getElementById('warning-btn');
 const spinner = document.getElementById('spinner');
-root = localStorage.getItem('root', root);
+root = location.host; 
 
 
 
