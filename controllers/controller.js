@@ -32,7 +32,7 @@ exports.faq = asyncHandler((req, res, next) => {
 //@access    Public
 exports.createNewUser = asyncHandler(async(req, res, next) => {
   const newUser = await User.create(req.body);
-  console.log(req.body);
+  newUser.save(); 
   res.status(201).json({
     success: true,
     data: newUser,
@@ -40,23 +40,3 @@ exports.createNewUser = asyncHandler(async(req, res, next) => {
 });
 
 
-//@desc      get appointments,
-//@route     POST /api/data
-//@access    Private
-exports.getData = asyncHandler(async(req, res, next) => {
-   const users = await User.find({paid: true}).sort({date: 1}).exec(); 
-
-   if(req.body.code !== process.env.DATA_SECRET){
-      res.status(401).json({
-        success: false, 
-        error: 'Access denied',
-        received: req.body.code,
-        code: process.env.DATA_SECRET
-      })
-   }else{
-      res.status(200).json({
-        success: true, 
-        data: users
-      })
-   }
-});

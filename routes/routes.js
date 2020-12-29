@@ -5,8 +5,7 @@ const express = require('express'),
       indexPage,
       register,
       faq,
-      createNewUser,
-      getData
+      createNewUser
     } = require('../controllers/controller'),
     {
       adminLoginPage,
@@ -20,8 +19,7 @@ router.route('/').get(indexPage);
 router.route('/register').get(register).post(createNewUser);
 router.route('/faq').get(faq);
 router.route('/admin').get(urlDirect, adminLoginPage).post(adminLogin); 
-router.get('/admin/:code/home', protect, adminHome); 
-router.post('/api/data', getData); 
+router.get('/admin/home', protect, adminHome); 
 // router.route('/admin').get(adminLoginPage).post(adminLogin);
 // router.route('/admin/dashboard').get(adminDashboard);
 

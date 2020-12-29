@@ -4,33 +4,23 @@ const jwt = require('jsonwebtoken'),
   User = require('../modules/user');
 
 exports.urlDirect = asyncHandler(async(req, res, next)=>{
-    let token;
-
-    if (
-        req.headers.authorization &&
-        req.headers.authorization.startsWith('Bearer')
-    ) {
-        token = req.headers.authorization.split(' ')[1];
-    }
-    if(token){
-        const decoded = jwt.verify(token, process.env.JWT_SECRET);
-        console.log(decoded);
-        res.render('adminHome', {root: process.env.root} )
+    const cookie = req.headers.cookie; 
+    if(cookie && cookie.split('=')[0]==='token'){
+        console.log(cookie.split('=')[1]);
+        const decoded = jwt.verify(cookie.split('=')[1], process.env.JWT_SECRET); 
+        res.redirect('/admin/home');
     }else{
-        res.render('adminLogin', {root: process.env.root} )
+        next();
     }
 });
 
 exports.protect = asyncHandler(async(req, res, next)=>{
-    let token;
-    let code = req.params.code; 
-    console.log(code); 
-    if(code){
-        const decoded = jwt.verify(code, process.env.JWT_SECRET);
-        req.user = 'admin'; 
+    const cookie = req.headers.cookie; 
+    if(cookie && cookie.split('=')[0]==='token'){
+        const decoded = jwt.verify(cookie.split('=')[1], process.env.JWT_SECRET); 
         next(); 
     }else{
-        return next(new ErrorResponse('Not authorized to access this route', 401));
+        res.redirect(`${process.env.root}/admin`)
     }
 });
 

@@ -5,7 +5,7 @@ const warningBtn = document.getElementById('warning-btn');
 const root = `${location.protocol}//${location.host}`;
 
 
-document.addEventListener('DOMContentLoaded', checkHeaders); 
+// document.addEventListener('DOMContentLoaded', checkHeaders); 
 
 //post function to make a post request to the server
  async function post(url, data){
@@ -36,11 +36,7 @@ form.addEventListener('submit', async function(e){
                 warningBtn.innerHTML = response.error;
                 warningBtn.style.color = 'red';
             }else{ 
-                console.log('received successful message...')
-                warningBtn.innerHTML = `Login successful. Grab your token: ${response.token}`;
-                localStorage.setItem('token', response.token);   
-                warningBtn.style.color = 'green';
-                window.location.href = `${root}/admin/${response.token}/home`; 
+                window.location.href = `${root}/admin/home`; 
             }
         })
         .catch(err => {

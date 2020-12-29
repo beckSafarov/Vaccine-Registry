@@ -32,7 +32,9 @@ const userSchema = new mongoose.Schema({
     number: {
       required: true, 
       type: Number
-    }
+    },
+    timeInNumbers: Number,
+    dateInString: String
 })
 
 // Create name slug from the name
@@ -40,6 +42,27 @@ userSchema.pre('save', function (next) {
     this.slug = slugify(this.name, { lower: true });
     next();
   });
+
+//create number version of the time
+userSchema.pre('save', function(){
+  this.timeInNumbers = parseInt(this.time.split(':').join('')); 
+})
+
+//create String version of the date
+userSchema.pre('save', function(){
+  let date = this.date; 
+  let day = date.getUTCDate()+1; 
+  let month = date.getUTCMonth()+1; 
+  let year = date.getUTCFullYear(); 
+  this.dateInString = `${day}/${month}/${year}`; 
+})
+
+userSchema.pre('save', function(){
+   let currentDate = new Date(); 
+   if(this.date < currentDate){
+     console.log(`${this.name}'s appointment has passed away`);
+   }
+});
 
 //sign JWT and return
 userSchema.methods.getSignedJwtToken = function () {

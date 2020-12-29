@@ -36,12 +36,59 @@
 
     <!--Side Nav for mobile view-->
     <ul class="sidenav" id = "mobile-nav">
-        <li><a class = "black-text" href="#">Dashboard</a></li>
+        <li><a class = "black-text" href="#Appointments">Appointments</a></li>
         <li><a class = "black-text" href="#">Settings</a></li>
         <li><a class = "black-text" href="#">Log out</a></li>
     </ul>
+    <h3 class = "heading center-align">Appointments Table</h3>
+    <div id = "Appointments" class="section">
+        <div class="container">
+            <table class = "striped centered responsive-table">
+                <thead>
+                  <tr>
+                      <th>Name</th>
+                      <th>Email</th>
+                      <th>Date</th>
+                      <th>Time</th>
+                      <th>Vaccines Bought</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <% data.forEach(function(user){ %> 
+                  <tr>
+                    <td><%=user.name%></td>
+                    <td><%=user.email%></td>
+                    <td><%=user.dateInString%></td>
+                    <td><%=user.time%></td>
+                    <td><%=user.number%></td>
+                  </tr>
+                  <%});%>
+                </tbody>
+              </table>
+              <br>
+        </div>
+    </div>
+    <div class="section">
+        <div class="container">
+            <h3 class = "heading center-align">General Stats</h3>
+            <table class = "striped centered responsive-table">
+                    <tr>
+                        <td><strong>Total vaccines sold</strong></td>
+                        <td><%=stats.numberOfVaccines%></td>
+                    </tr>
+                    <tr>
+                        <td><strong>Total revenue</strong></td>
+                        <td><%=stats.sum%></td>
+                    </tr>
+            </table>
+        </div>
+    </div>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+    <script>
+        
+    </script>
     <script src="<%=root%>/js/adminHome.js"></script>
+
 </body>
 </html>

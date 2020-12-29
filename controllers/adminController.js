@@ -33,8 +33,13 @@ exports.adminLogin = asyncHandler((req, res, next) => {
 //@route     GET /admin/:code/home
 //@access    Private
 exports.adminHome = asyncHandler(async(req, res, next)=>{
-   console.log('adminHome controller is running...');
-   res.render('adminHome', {root: process.env.root}); 
+   const data = await User.find({paid: true}).sort({"date": 1, "timeInNumbers": 1});
+   const stats = getStats(data); 
+   res.render('adminHome', {
+     root: process.env.root,
+     data: data,
+     stats: stats
+    }); 
 });
 
  //get token from model, create cookie and send response
@@ -53,6 +58,22 @@ exports.adminHome = asyncHandler(async(req, res, next)=>{
     token
   });
 };
+
+function getStats(data){
+  let sum = 0; 
+  let numberOfVaccines = 0;
+  data.forEach(function(user){
+    numberOfVaccines += user.number; 
+  })
+  sum = numberOfVaccines * 50; 
+  return {
+    numberOfVaccines,
+    sum
+  }
+  
+}
+
+
 
 
 
