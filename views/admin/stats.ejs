@@ -1,0 +1,69 @@
+<%- include('header', {title: 'Stats | IMA Vaccine'}) %> 
+
+<div class="section">
+    <div class="container">
+        <h3 class = "heading center-align">General Stats</h3>
+        
+        <section class="section">
+            <h5 class="blue-text"><strong>Appointments</strong></h5>
+            <div class="divider"></div>
+            <table style="font-size: 20px;" class = "responsive-table">
+                    
+                <tr>
+                    <td><strong>Upcoming Appointments</strong></td>
+                    <td><%=stats.upcomingAppointments%></td>
+                </tr>
+                <tr>
+                    <td><strong>Past Appointments</strong></td>
+                    <td><%=stats.pastAppointments%></td>
+                </tr>
+                <tr>
+                    <td><strong>Totally</strong></td>
+                    <td><%=stats.totalAppointments%></td>
+                </tr>
+            </table>
+        </section>
+        
+        <section class="section">
+            <h5 class="blue-text"><strong>Financials</strong></h5>
+            <div class="divider"></div>
+            <table style="font-size: 20px;" class = "responsive-table">
+                <tr>
+                    <td><strong>Vaccines Sold in this month</strong></td>
+                    <td><%=stats.vaccinesSoldThisMonth%></td>
+                </tr>
+                <tr>
+                    <td><strong>Total vaccines sold</strong></td>
+                    <td><%=stats.numberOfVaccines%></td>
+                </tr>
+                <tr>
+                    <td><strong>Revenue this month</strong></td>
+                    <td id = "revenueThisMonth"></td>
+                </tr>
+                <tr>
+                    <td><strong>Total revenue</strong></td>
+                    <td><%=stats.sum%></td>
+                </tr>
+            </table>
+        </section>
+        
+    </div>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+<script>
+    let soldThisMonth = parseInt(`<%=stats.vaccinesSoldThisMonth%>`);
+    let revenueThisMonth = soldThisMonth * 50; 
+    document.getElementById('revenueThisMonth').innerHTML = revenueThisMonth; 
+
+     document.addEventListener('DOMContentLoaded', function() {
+         //init sidenav
+        const sidenav = document.querySelector('.sidenav');
+        M.Sidenav.init(sidenav, {});
+    });
+
+    document.getElementById('statsLink').classList.replace('black-text', 'blue-text');
+    document.getElementById('statsSideLink').classList.replace('black-text', 'blue-text');
+</script>
+</body>
+</html>

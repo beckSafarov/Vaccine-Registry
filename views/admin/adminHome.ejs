@@ -1,0 +1,62 @@
+<%- include('header', {title: 'Home | IMA Vaccine'}) %> 
+
+    <h3 class = "heading center-align">Appointments Table</h3>
+    <div id = "Appointments" class="section">
+       
+
+        <div class="container">
+            <div class="row">
+                <div class="col s12">
+                    <ul style="border-radius: 25px;" class="tabs blue lighten-4">
+                      <li class="tab col s3"><a id = "todayTab" class="black-text" href="?filter=today">Today</a></li>
+                      <li class="tab col s3"><a id = "weekTab" class="black-text" href="?filter=week">This Week</a></li>
+                      <li class="tab col s3"><a id = "allTab" class="black-text" href="?filter=all">All</a></li>
+                      <li class="tab col s3"><a id = "pastTab" class="black-text" href="?filter=past">Past</a></li>
+                    </ul>
+                  </div>
+            </div>
+           
+            
+            <%if(data.length > 0){%>
+              <div class="divider"></div>
+                <table class = "striped centered responsive-table">
+                    <thead>
+                      <tr>
+                          <th>Name</th>
+                          <th>Email</th>
+                          <th>Date</th>
+                          <th>Time</th>
+                          <th>Vaccines Bought</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <% data.forEach(function(user){ %> 
+                      <tr>
+                        <td><%=user.name%></td>
+                        <td><%=user.email%></td>
+                        <td><%=user.dateInString%></td>
+                        <td><%=user.time%></td>
+                        <td><%=user.number%></td>
+                      </tr>
+                      <%});%>
+                    </tbody>
+                </table> 
+                <div class="divider"></div>
+            <%}else{%>
+                <p style="margin-top: 50px;" class = "center-align"> <strong>No appointments found</strong></p>
+            <%}%>
+              
+              <br>
+        </div>
+    </div>
+
+
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+    <script>
+        const tab = `<%=tab%>`;
+    </script>
+    <script src="<%=root%>/js/adminHome.js"></script>
+
+</body>
+</html>

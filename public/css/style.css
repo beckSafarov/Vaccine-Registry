@@ -107,3 +107,14 @@ h5 {
 .error {
   background: tomato;
 }
+
+#filterBtn {
+  width: 100%;
+  margin-top: 10px;
+  margin-bottom: 20px;
+  border-radius: 25px;
+}
+
+.tabsLink {
+  color: black;
+}

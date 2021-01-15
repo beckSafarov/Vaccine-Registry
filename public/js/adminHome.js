@@ -1,24 +1,26 @@
-const sidenav = document.querySelector('.sidenav');
-M.Sidenav.init(sidenav, {});
+
 const root = `${location.protocol}//${location.host}`;
 
-/*TO DO LIST
-1. (Done)retrieve user data 
-2. sort by date
-3. display them on table 
-4. Give general information, like earned profit, etc. 
-*/
 
-
+loadEventListeners();
 function loadEventListeners(){
-    document.addEventListener('DOMContentLoaded', main()); 
+    document.addEventListener('DOMContentLoaded', main); 
 }
 
 
 
-async function main(){
+function main(){
+    //init sidenav
+    const sidenav = document.querySelector('.sidenav');
+    M.Sidenav.init(sidenav, {});
     
+    //give color to the right place
+    document.getElementById(tab).classList.add('blue');
+    document.getElementById(tab).classList.add('white-text')
+    document.getElementById('appointmentsLink').classList.replace('black-text', 'blue-text');
+    document.getElementById('appointmentsSideLink').classList.replace('black-text', 'blue-text');
 }
+
 
 
 

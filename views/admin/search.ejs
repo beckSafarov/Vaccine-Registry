@@ -1,0 +1,51 @@
+<%- include('header', {title: 'Search | IMA Vaccine'}) %> 
+<h3 class = "center-align">Search user</h3>
+<section class="section">
+    <div class="container">
+        <div class="input-field col s6">
+            <input id="searchField" type="text" class="validate autocomplete" value = "<%=lastQuery%>">
+            <label for="searchField">Search by Name</label>
+        </div>
+    </div>
+</section>
+
+
+
+<section class="section">
+    <div class="container">
+            <%if(found){%>
+                <table class = "centered responsive-table">
+                    <thead>
+                      <tr>
+                          <th>Name</th>
+                          <th>Email</th>
+                          <th>Date</th>
+                          <th>Time</th>
+                          <th>Vaccines Bought</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td><%=data.name%></td>
+                        <td><%=data.email%></td>
+                        <td><%=data.dateInString%></td>
+                        <td><%=data.time%></td>
+                        <td><%=data.number%></td>
+                      </tr>
+                    </tbody>
+                </table> 
+            <%}else{%>
+                <p class = "center-align red-text"> <strong><%=message %> </strong></p>
+            <%}%>
+    </div>
+</section>
+
+
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+<script>
+    const root = `<%=root%>`;
+</script>
+<script src="<%=root%>/js/search.js"></script>
+</body>
+</html>

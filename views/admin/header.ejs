@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <script defer src="https://use.fontawesome.com/releases/v5.0.9/js/all.js" integrity="sha384-8iPTk2s/jMVj81dnzb/iFR2sdA7u06vHJyyLlAd4snFpCl/SnyUjRrbdJsw1pGIl"
+    crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="<%=root%>/css/style.css">
+    <title><%= title %> </title>
+    <style>
+        body{
+            background-color: whitesmoke;
+        }
+    </style>
+</head>
+<body>
+     <!--1. Navbar-->
+     <div class="navbar-fixed">
+        <nav class="white">
+            <div class="container">
+                <div class="nav-wrapper">
+                    <a href="<%=root%>/admin/home" class="brand-logo"><img src="https://i.ibb.co/xHpSycB/IMALogo.png" alt="IMA" height = 60 weight = 60></a>
+                    <a href="#" class = "black-text sidenav-trigger" data-target = "mobile-nav">
+                        <i class="fas fa-bars fa-2x"></i>
+                    </a>
+                    <ul class="right hide-on-med-and-down black-text">
+                        <li>
+                            <a id="appointmentsLink" class = "black-text waves-effect navtext" href="<%=root%>/admin/home">Appointments</a>
+                        </li>
+                        <li>
+                            <a id="statsLink" class = "black-text waves-effect navtext" href="<%=root%>/admin/stats">Stats</a>
+                        </li>
+                        <li>
+                          <a id="searchLink" class = "black-text waves-effect navtext" href="<%=root%>/admin/search">Search</a>
+                        </li>
+                        <li>
+                            <a id="logoutLink" class = "black-text waves-effect navtext" onclick="logout()">Logout</a>
+                          </li>
+                        
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </div>
+
+    <script>
+        async function logout(){
+            if(confirm('Are you sure to logout?')){
+                const logout = await fetch(`<%=root%>/admin/logout`);
+                const logoutResponse = await logout.json(); 
+                if(logoutResponse.success){
+                    location.href = `<%=root%>/admin`;
+                }else{
+                    console.log(logoutResponse);
+                }
+            }
+        }
+    </script>
+
+
+    <!--Side Nav for mobile view-->
+    <ul class="sidenav" id = "mobile-nav">
+        <li><a id="appointmentsSideLink" class = "black-text" href="<%=root%>/admin/home">Appointments</a></li>
+        <li><a id="statsSideLink" class = "black-text" href="<%=root%>/admin/stats">Stats</a></li>
+        <li><a id="searchSideLink" class = "black-text" href="#">Search</a></li>
+        
+    </ul>

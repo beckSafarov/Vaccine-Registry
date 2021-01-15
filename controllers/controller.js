@@ -32,11 +32,15 @@ exports.faq = asyncHandler((req, res, next) => {
 //@access    Public
 exports.createNewUser = asyncHandler(async(req, res, next) => {
   const newUser = await User.create(req.body);
+  newUser.getDayIntervals(); 
   newUser.save(); 
   res.status(201).json({
     success: true,
     data: newUser,
   });
 });
+
+
+
 
 
