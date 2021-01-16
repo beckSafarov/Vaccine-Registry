@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Alegreya+Sans:wght@300&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=BioRhyme:wght@200&family=Frank+Ruhl+Libre&family=Spectral:wght@300&family=Varela+Round&display=swap" rel="stylesheet">
+    <link rel="icon" href=”assets/img/IMALogo.png” sizes="16x16">
+    <script defer src="https://use.fontawesome.com/releases/v5.0.9/js/all.js" integrity="sha384-8iPTk2s/jMVj81dnzb/iFR2sdA7u06vHJyyLlAd4snFpCl/SnyUjRrbdJsw1pGIl"
+    crossorigin="anonymous"></script>
+    <link rel="stylesheet" type = "text/css" href="css/style.css">
+    <title><%= title %> </title>
+</head>
+<body id = "home" class = "scrollspy black-text">
+
+    <!--1. Navbar-->
+    <div class="navbar-fixed">
+        <nav class="white">
+            <div class="container">
+                <div class="nav-wrapper">
+                    <a href="" class="brand-logo"><img src="https://i.ibb.co/xHpSycB/IMALogo.png" alt="IMA" height = 60 weight = 60></a>
+                    <a href="#" class = "black-text sidenav-trigger" data-target = "mobile-nav">
+                        <i class="fas fa-bars fa-2x"></i>
+                    </a>
+                    <ul class="right hide-on-med-and-down black-text">
+                        <li>
+                            <a class = "black-text waves-effect navtext" href="<%= root %>">Home</a>
+                        </li>
+                        <li>
+                            <a id="aboutLink" class = "black-text waves-effect navtext" href="#about">About</a>
+                        </li>
+                        <li>
+                          <a id="whyUsLink" class = "black-text waves-effect navtext" href="#whyus">Why Us?</a>
+                        </li>
+                        <li>
+                            <a id="contactLink" class = "black-text waves-effect navtext" href="#contact">Contact</a>
+                        </li>
+                        <li>
+                            <a class = "black-text waves-effect navtext" href="<%=root%>/faq">FAQ</a>
+                          </li>
+                        <li>
+                          <form action="/register" method = "GET">
+                            <button class = "white-text waves-effect waves-light navtext btn blue darken-2 hoverable" >Get Vaccine</button>
+                         </form>
+
+                       </li>
+                    </ul>
+
+
+                </div>
+            </div>
+        </nav>
+    </div>
+
+    <!--Side Nav for mobile view-->
+    <ul class="sidenav" id = "mobile-nav">
+        <li><a class = "black-text" href="<%= root %>">Home</a></li>
+        <li><a class = "black-text" href="#about">About</a></li>
+        <li><a class = "black-text" href="#whyus">Why Us?</a></li>
+        <li><a class = "black-text" href="#contact">Contact</a></li>
+        <li><a class = "black-text" href="<%=root%>/faq">FAQ</a></li>
+        <li><form action="/register" method = "GET"><button class = "white-text center-align btn blue darken-2" style = "margin-left: 20px;">Get Vaccine</button></form></li>
+    </ul>

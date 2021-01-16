@@ -15,12 +15,15 @@ document.addEventListener('DOMContentLoaded', function() {
         interval: 4000
     });
 
+    //init drop down
     var dropdownElems = document.querySelector('.dropdown-trigger');
     M.Dropdown.init(dropdownElems, {});
 
+    //init scrollspy
     var scrollspyElems = document.querySelectorAll('.scrollspy');
     M.ScrollSpy.init(scrollspyElems, {});
 
+    //init sidenav
     const sidenav = document.querySelector('.sidenav');
     M.Sidenav.init(sidenav, {});    
 });

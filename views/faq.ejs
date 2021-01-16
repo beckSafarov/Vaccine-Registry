@@ -1,12 +1,42 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/skeleton/2.0.4/skeleton.min.css" integrity="sha512-EZLkOqwILORob+p0BXZc+Vm3RgJBOe1Iq/0fiI7r/wJgzOFZMlsqTa29UEl6v6U6gsV4uIpsNZoV32YZqrCRCQ==" crossorigin="anonymous" />
-    <title>FAQ</title>
-</head>
-<body>
-    <h1>FAQ page</h1>
+<%- include('header', {title: 'FAQ || IMA Vaccine'}) %> 
+    <main>
+    <h3 class="center-align">Frequently Asked Questions</h3>
+    <section class="section">
+        <div class="container">
+            <ul class="collapsible">
+                <li>
+                  <div class="collapsible-header"><i class="material-icons">expand_more</i>What can I do now to help protect myself from getting COVID-19 since vaccine not available yet? </div>
+                  <div class="collapsible-body"><span>You should cover your mouth and nose with a mask when around others, avoid close contact with people who are sick, stay 6 feet away from others, avoid crowds, and wash your hands often. Get more information about these and other steps you can take to protect yourself and others from COVID-19.</span></div>
+                </li>
+                <li>
+                  <div class="collapsible-header"><i class="material-icons">expand_more</i>Will there be enough vaccine for everyone? </div>
+                  <div class="collapsible-body"><span>The current vaccine available in Malaysia are 53 millions dose that can cover 82.8% population of Malaysian. The goverment will prioritize to those who in need first.This would mean that not everyone will be able to be vaccinated right away. It is understandable how concerning this would be for people, especially for those who are at increased risk for serious illness from this virus and for their loved ones.</span></div>
+                </li>
+                <li>
+                  <div class="collapsible-header"><i class="material-icons">expand_more</i>Do I need to wear a mask when i receive a COVID-19 vaccine?</div>
+                  <div class="collapsible-body"><span>Yes. It is recommends that during the pandemic people wear a mask that covers their nose and mouth when in contact with others outside your household, when in healthcare facilities, and when receiving any vaccine, including a COVID-19 vaccine. Anyone who has trouble breathing or is unable to remove a mask without assistance should not wear a mask. For more information, visit considerations for wearing masks.</span></div>
+                </li>
+                <li>
+                    <div class="collapsible-header"><i class="material-icons">expand_more</i>Does immunity after getting COVID-19 last longer than protection from COVID-19 vaccines? </div>
+                    <div class="collapsible-body">The protection someone gains from having an infection (called natural immunity) varies depending on the disease, and it varies from person to person. Since this virus is new, we don’t know how long natural immunity might last. Some early evidence—based on some people— seems to suggest that natural immunity may not last very long.
+                        <br>Regarding vaccination, we won’t know how long immunity lasts until we have a vaccine and more data on how well it works.
+                        Both natural immunity and vaccine-induced immunity are important aspects of COVID-19 that experts are trying to learn more about.</div>
+                  </li>
+              </ul>
+        </div>
+    </section>
+    </main>
+
+    <%- include('footer') %> 
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            var elems = document.querySelectorAll('.collapsible');
+            var instances = M.Collapsible.init(elems, {});
+        });
+
+        document.getElementById('aboutLink').href = '<%=root%>/#about';
+        document.getElementById('whyUsLink').href = '<%=root%>/#whyus';
+        document.getElementById('contactLink').href = '<%=root%>/#contact';
+    </script>
 </body>
 </html>

@@ -27,6 +27,13 @@ exports.faq = asyncHandler((req, res, next) => {
 });
 
 
+//@desc      Full Info Page
+//@route     GET /about
+//@access    Public
+exports.about = asyncHandler((req, res, next) => {
+  res.render('fullinfo', {root: process.env.root});
+});
+
 //@desc      create/sign-up a new user,
 //@route     POST /register
 //@access    Public

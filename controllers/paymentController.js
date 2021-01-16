@@ -26,7 +26,7 @@ exports.payPage = asyncHandler(async(req, res, next) => {
             );
     }
 
-    res.render('pay', {amount: user.number});
+    res.render('payment/pay', {amount: user.number});
 });
 
 
@@ -111,7 +111,7 @@ exports.successPage = asyncHandler(async(req, res, next) => {
           user.paid = true; //change the user as paid
           await user.save(); //save the change
           sendEmailConfirmation(user, paymentDetails);  //send email confirmation about his payment
-          res.render('success', { //render the success page
+          res.render('payment/success', { //render the success page
               user: user,
               payment: paymentDetails
             });
@@ -125,5 +125,5 @@ exports.successPage = asyncHandler(async(req, res, next) => {
 //@access    Public
 exports.errorPage = asyncHandler(async(req, res, next) => {
     const user = await User.findById(req.params.id);
-    res.render('unsuccessful', {user: user});
+    res.render('payment/unsuccessful', {user: user});
 });

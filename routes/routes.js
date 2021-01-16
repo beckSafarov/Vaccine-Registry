@@ -5,7 +5,8 @@ const express = require('express'),
       indexPage,
       register,
       faq,
-      createNewUser
+      createNewUser,
+      about
     } = require('../controllers/controller');
 
 
@@ -13,6 +14,7 @@ const express = require('express'),
 router.route('/').get(indexPage);
 router.route('/register').get(register).post(createNewUser);
 router.route('/faq').get(faq);
+router.route('/about').get(about);
 
 
 module.exports = router; 
