@@ -9,14 +9,14 @@ const sendEmailConfirmation = require('../utils/emailConfirmation');
 
 
 paypal.configure({
-    'mode': 'live',
-    'client_id': `${process.env.CLIENT_LIVE_ID}`,
-    'client_secret': `${process.env.CLIENT_LIVE_SECRET}`
+    'mode': 'sandbox',
+    'client_id': `${process.env.CLIENT_ID}`,
+    'client_secret': `${process.env.CLIENT_SECRET}`
 });
 
 
 //@desc      get pay page
-//@route     GET /pay/:id
+//@route     GET /sandbox/pay/:id
 //@access    Public
 exports.payPage = asyncHandler(async(req, res, next) => {
     const user = await User.findById(req.params.id);
@@ -32,22 +32,6 @@ exports.payPage = asyncHandler(async(req, res, next) => {
     });
 });
 
-// //@desc      get live pay page
-// //@route     GET /pay/live/:id
-// //@access    Public
-// exports.payPage = asyncHandler(async(req, res, next) => {
-//     const user = await User.findById(req.params.id);
-//     if(!user){
-//         return next(
-//             new ErrorResponse(`Such user not found`, 404)
-//             );
-//     }
-
-//     res.render('payment/pay_live', {
-//         amount: user.number,
-//         root: process.env.root
-//     });
-// });
 
 //@desc      get pay page
 //@route     GET /pay/sandbox/paypal

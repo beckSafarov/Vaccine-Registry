@@ -1,42 +1,67 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
-    <title>Successful Payment</title>
-    <style>
-        body{
-            background-color: whitesmoke;
-        }
-    </style>
-</head>
-<body>
-    <h1 class = "heading center-align">Your payment was successful!</h1>
-    <h3 class = "heading center-align">Grab your payment slip!</h3>
+<%- include('../header', {title: 'Success | IMA Vaccine'}) %> 
+<main>
+    <h3 class = "heading center-align">Your payment was successful!</h3>
     <br>
     <div class="container">
-        <p><strong>Name:</strong> <%= user.name %> </p>
-        <p><strong>Email:</strong> <%= user.email %> </p>
-        <p><strong>Date of appointment:</strong> <%= user.date.toDateString() %> </p>
-        <p id = "usertime"><strong>Time of appointment:</strong> <%= user.time %> </p>
-        <p>Place of appointment: Selangor, Petaling Jaya, IMA Clinic</p>
-        <p><strong>Number of vaccines bought:</strong> <%= user.number %> </p>
-        <p id = "totalpayed"><strong>Overall payed:</strong> $50 </p>
-        <p><strong>Payer ID:</strong> <%= payment.payerId %> </p>
-        <p><strong>Payment ID:</strong> <%= payment.paymentId %> </p>
-        <p id = "today"><strong>Payment Date:</strong> <%= payment.paymentId %> </p>
-    <br>
-    <p>Copy of transcript should be sent at your email at <strong><%= user.email %></strong> </p>
+        <div class="container">
+            <table class="striped responsive-table">
+                <tr>
+                    <td><strong>Name</strong></td>
+                    <td class = "right-align"><%=user.name%></td>
+                </tr>
+                <tr>
+                    <td><strong>Email</strong></td>
+                    <td class = "right-align"><%=user.email%></td>
+                </tr>
+                <tr>
+                    <td><strong>Date of appointment</strong></td>
+                    <td class = "right-align"><%=user.date.toDateString()%></td>
+                </tr>
+                <tr>
+                    <td><strong>Time of Appointment</strong></td>
+                    <td class = "right-align" id = "usertime"><%=user.time%></td>
+                </tr>
+                <tr>
+                    <td><strong>Place of appointment</strong></td>
+                    <td class = "right-align">Selangor, Petaling Jaya, IMA Clinic</td>
+                </tr>
+                <tr>
+                    <td><strong>Number of vaccines: </strong></td>
+                    <td class = "right-align"><%= user.number %></td>
+                </tr>
+                <tr>
+                    <td><strong>Number of vaccines: </strong></td>
+                    <td class = "right-align" id = "totalpayed">$50</td>
+                </tr>
+                <tr>
+                    <td><strong>Payer ID: </strong></td>
+                    <td class = "right-align"><%= payment.payerId %></td>
+                </tr>
+                <tr>
+                    <td><strong>Payment Date </strong></td>
+                    <td class = "right-align"><%= payment.paymentId %></td>
+                </tr>
+                <tr>
+                    <td><strong>Payment Date: </strong></td>
+                    <td class = "right-align" id = "today"><%= payment.paymentId %> </td>
+                </tr>
+            </table>
+        </div>
+        <div style="margin-top: 30px;" class="row">
+            <div class="left-align">
+                <p>Copy of payment slip should be sent at your email at <strong><%= user.email %></strong> </p>
+            </div>
+        </div>
     </div>
 
-
+</main>
+<%- include('../footer') %> 
     <script>
         const totalpayed = parseInt('<%=user.number%>') * 50;
-        document.getElementById('totalpayed').innerHTML = `<strong>Total payed:</strong> $${totalpayed}`;
+        document.getElementById('totalpayed').innerHTML = `$${totalpayed}`;
 
         const today = new Date();
-        document.getElementById('today').innerHTML = `<strong>Payment Date:</strong> ${today} `;
+        document.getElementById('today').innerHTML = `${today}`;
 
         //changing 19:30 to 7:30 PM
         const userTime = `<%= user.time %>`;
@@ -52,7 +77,7 @@
             identifier = 'AM';
         }
 
-        document.getElementById('usertime').innerHTML = `<strong>Time of appointment:</strong> ${hour}:${minutes} ${identifier}`;
+        document.getElementById('usertime').innerHTML = `${hour}:${minutes} ${identifier}`;
 
     </script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>

@@ -4,8 +4,7 @@ const date = document.getElementById('date');
 const time = document.getElementById('time');
 const number = document.getElementById('number');
 const warningBtn = document.getElementById('warning-btn');
-const root = localStorage.getItem('root');
-console.log(root);
+
 //date picker
 document.addEventListener('DOMContentLoaded', function() {
     var elems = document.querySelectorAll('.datepicker');
@@ -71,7 +70,7 @@ document.getElementById('form').addEventListener('submit', function(e){
         time: time.value.trim(),
         number: number.value.trim(),
     };
-
+    
     post(`${root}/register`, data)
     .then(data => {
         if(data.success == false){
@@ -82,5 +81,5 @@ document.getElementById('form').addEventListener('submit', function(e){
         }
 
     })
-    .catch(err => console.log(err));
+    // .catch(err => console.log(err));
 })//end of the form function

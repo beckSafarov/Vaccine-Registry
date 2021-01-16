@@ -23,9 +23,6 @@ document.addEventListener('DOMContentLoaded', function() {
     var scrollspyElems = document.querySelectorAll('.scrollspy');
     M.ScrollSpy.init(scrollspyElems, {});
 
-    //init sidenav
-    const sidenav = document.querySelector('.sidenav');
-    M.Sidenav.init(sidenav, {});    
 });
 
 

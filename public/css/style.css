@@ -12,6 +12,14 @@ a {
   color: black;
   font-size: 14px;
 }
+
+.pageLink {
+  font-family: 'Spectral', serif;
+  color: #1e88e5;
+  text-decoration: none;
+  font-size: 18px;
+}
+
 .flow-text {
   font-size: 18px;
 }

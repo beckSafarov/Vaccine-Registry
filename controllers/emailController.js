@@ -7,7 +7,7 @@ const nodemailer = require('nodemailer'),
 const ErrorResponse = require('../utils/errorResponse');
 
 
-//@desc      /
+//@desc      send email
 //@route     POST /email
 //@access    Public
 exports.emailSend = asyncHandler(async(req, res, next)=>{

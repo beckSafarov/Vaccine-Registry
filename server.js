@@ -5,14 +5,21 @@ const express = require('express'),
   morgan =require('morgan'),
   colors = require('colors'),
   errorHandler = require('./middleware/error'),
-  emailConfirmation = require('./utils/emailConfirmation');
-  PORT = process.env.PORT || 5000;
+  emailConfirmation = require('./utils/emailConfirmation'),
+  xss = require('xss-clean'),
+  helmet = require('helmet'),
+  mongoSanitize = require('express-mongo-sanitize');
+  
 
 //load env vars
 dotenv.config({ path: './config/config.env' });
+const PORT = process.env.PORT || 5000;
+
 app.set('view engine', 'ejs');
 //Body parser
 app.use(express.json());
+
+
 
 //the next set of declarations
 const routes = require('./routes/routes'),
@@ -22,6 +29,18 @@ const routes = require('./routes/routes'),
   connectDB = require('./config/db'); //connecting the database
 
 connectDB();
+//mongo sanitize
+app.use(mongoSanitize());
+
+//use helmet
+app.use(
+  helmet({
+    contentSecurityPolicy: false,
+  })
+);
+
+//prevent XSS attacks
+app.use(xss());
 
 //set static folder
 app.use(express.static(path.join(__dirname, 'public')));

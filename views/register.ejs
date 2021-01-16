@@ -1,39 +1,68 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
-    <title>Register</title>
-</head>
-<body>
-    <div class="container">
-        <h1>Register</h1>
-        <form id = "form">
-            <div class="input-field">
-                <label for="name">Enter your name</label>
-                <input id = "name" type="text" name="name" required>
+<!-- <- include('header', {title: 'Register | IMA Vaccine'}) %>  -->
+<%- include('header2', {title: 'Register | IMA Vaccine'}) %> 
+    <main>
+        <section class="section">
+            <div class="container">
+                <nav>
+                    <div class="nav-wrapper blue darken-1">
+                      <div class="col s12">
+                        <a style="margin-left: 10px; color: white;" onclick="javascript:void(0)" class="breadcrumb">Register</a>
+                        <a style="color: #BCDBF7;" onclick="javascript:void(0)" class="breadcrumb">Payment</a>
+                      </div>
+                    </div>
+                  </nav>
             </div>
-            <div class="input-field">
-                <label for="email">Enter your email</label>
-                <input id = "email" type="email" name="email" required>
+        </section>
+
+        <section class="section">
+            <h4 class="center-align">Register</h4>
+            
+                  <div class="container" >
+                    <div class="container">
+                        <div class="row">
+                            <p>One vaccine currently costs $50 . Refer to <a class="pageLink" href="<%root%>/about">about page</a> or <a class="pageLink" href="<%root%>/faq">FAQ</a> for more info.</p>
+                        </div>
+                        <form id = "form">
+                            <div class="input-field col s12">
+                                <label for="name">Enter your name</label>
+                                <input id = "name" type="text" name="name" required>
+                            </div>
+                            <div class="input-field col s12">
+                                <label for="email">Enter your email</label>
+                                <input id = "email" type="email" name="email" required>
+                            </div>
+                            <div class="input-field col s12">
+                                <label for="date">Date</label>
+                                <input id = "date" name = "date" type="text" class = "datepicker" required>
+                            </div>
+                            <div class="input-field col s12">
+                                <label for="time">Time</label>
+                                <input id = "time" name = "time" type="text" class="timepicker" required>
+                            </div>
+                            <div class="input-field col s12">
+                                <label for="time">Number of vaccines</label>
+                                <input id = "number" name = "number" type="number" required>
+                            </div>
+                            
+                            <div style="margin-top: 50px; margin-bottom: 50px;" class="row">
+                                
+                                <button style="width: 100%;" type="submit" class="btn white-text hoverable waves-effect">Submit</button>
+                                <br>
+                                <div class="center-align">
+                                    <p id = "warning-btn" style = "color:red;"></p>
+                                </div>
+                            </div>
+                            
+                        </form>
+                    </div>
             </div>
-            <label for="date">Date</label>
-            <input id = "date" name = "date" type="text" class = "datepicker" required>
-            <label for="time">Time</label>
-            <input id = "time" name = "time" type="text" class="timepicker" required>
-            <label for="time">Number of vaccines</label>
-            <input id = "number" name = "number" type="number" required>
-            <br>
-            <input class = "white-text waves-effect navtext btn blue darken-2 hoverable" type="submit" value = "Submit">
-            <p id = "warning-btn" style = "color:red;"></p>
-        </form>
-    </div>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+             
+        </section>
+    </main>
+    
+    <%- include('footer') %> 
     <script src = "<%= root %>/js/register.js"> </script>
     <script>
-        const root1 = '<%= root %>'; 
-        localStorage.setItem('root', root1); 
         form.action = 'email'; 
         form.post = 'POST'; 
     </script>

@@ -4,7 +4,9 @@ const express = require('express'),
       payPage,
       payPalPayment,
       successPage,
-      errorPage
+      errorPage,
+      errorSandbox,
+      paySandbox
     } = require('../controllers/paymentController.js');
   
 
@@ -12,6 +14,8 @@ const express = require('express'),
 router.route('/:id').get(payPage).post(payPalPayment); 
 router.route('/success/:id').get(successPage); 
 router.route('/error/:id').get(errorPage); 
+router.route('/sandbox/error').get(errorSandbox); 
+router.route('/sandbox/paypal').get(paySandbox); 
 
 
 module.exports = router; 

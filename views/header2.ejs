@@ -10,10 +10,9 @@
     <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@600&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Alegreya+Sans:wght@300&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=BioRhyme:wght@200&family=Frank+Ruhl+Libre&family=Spectral:wght@300&family=Varela+Round&display=swap" rel="stylesheet">
-    <link rel="icon" href=”assets/img/IMALogo.png” sizes="16x16">
+    <link rel="icon" href="<%= root %>/favicon.ico” sizes="16x16">
     <script defer src="https://use.fontawesome.com/releases/v5.0.9/js/all.js" integrity="sha384-8iPTk2s/jMVj81dnzb/iFR2sdA7u06vHJyyLlAd4snFpCl/SnyUjRrbdJsw1pGIl"
     crossorigin="anonymous"></script>
-
     <link rel="stylesheet" type = "text/css" href="<%=root%>/css/style.css">
     <title><%= title %> </title>
 </head>
@@ -41,17 +40,9 @@
                         <li>
                             <a id="contactLink" class = "black-text waves-effect navtext" href="#contact">Contact</a>
                         </li>
-                        
                         <li>
                             <a class = "black-text waves-effect navtext" href="<%=root%>/faq">FAQ</a>
-                        </li>
-
-                        <li>
-                          <form action="/register" method = "GET">
-                            <button class = "white-text waves-effect waves-light navtext btn blue darken-2 hoverable" >Get Vaccine</button>
-                         </form>
-
-                       </li>
+                          </li>
                     </ul>
 
 
@@ -67,5 +58,4 @@
         <li><a class = "black-text" href="#whyus">Why Us?</a></li>
         <li><a class = "black-text" href="#contact">Contact</a></li>
         <li><a class = "black-text" href="<%=root%>/faq">FAQ</a></li>
-        <li><form action="/register" method = "GET"><button class = "white-text center-align btn blue darken-2" style = "margin-left: 20px;">Get Vaccine</button></form></li>
     </ul>
