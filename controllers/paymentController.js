@@ -9,9 +9,9 @@ const sendEmailConfirmation = require('../utils/emailConfirmation');
 
 
 paypal.configure({
-    'mode': 'live',
-    'client_id': `${process.env.CLIENT_LIVE_ID}`,
-    'client_secret': `${process.env.CLIENT_LIVE_SECRET}`
+    'mode': 'sandbox',
+    'client_id': `${process.env.CLIENT_ID}`,
+    'client_secret': `${process.env.CLIENT_SECRET}`
 });
 
 
@@ -25,40 +25,15 @@ exports.payPage = asyncHandler(async(req, res, next) => {
             new ErrorResponse(`Such user not found`, 404)
             );
     }
-
+    paypal.configuration.mode = 'sandbox';
+    paypal.configuration.client_id = process.env.CLIENT_ID;
+    paypal.configuration.client_secret = process.env.CLIENT_SECRET;
     res.render('payment/pay', {
         amount: user.number,
         root: process.env.root
     });
 });
 
-// //@desc      get live pay page
-// //@route     GET /pay/live/:id
-// //@access    Public
-// exports.payPage = asyncHandler(async(req, res, next) => {
-//     const user = await User.findById(req.params.id);
-//     if(!user){
-//         return next(
-//             new ErrorResponse(`Such user not found`, 404)
-//             );
-//     }
-
-//     res.render('payment/pay_live', {
-//         amount: user.number,
-//         root: process.env.root
-//     });
-// });
-
-//@desc      get pay page
-//@route     GET /pay/sandbox/paypal
-//@access    Public
-exports.paySandbox = asyncHandler(async(req, res, next) => {
-    const amount = 2; 
-    res.render('payment/pay', {
-        amount,
-        root: process.env.root,
-    });
-});
 
 
 //@desc      make payment through Paypal
@@ -139,7 +114,6 @@ exports.successPage = asyncHandler(async(req, res, next) => {
           console.log(error.response);
           throw error;
         }else{
-          console.log(JSON.stringify(payment));
           user.paid = true; //change the user as paid
           await user.save(); //save the change
           sendEmailConfirmation(user, paymentDetails);  //send email confirmation about his payment
@@ -170,3 +144,6 @@ exports.errorSandbox = asyncHandler(async(req, res, next) => {
         root: process.env.root
     });
 });
+
+
+

@@ -76,7 +76,7 @@ document.getElementById('form').addEventListener('submit', function(e){
         if(data.success == false){
             warningBtn.innerHTML = data.error;
         }else{
-            window.location.href = `${root}/pay/${data.data._id}`;
+            window.location.href = `${root}/live/${data.data._id}`;
             warningBtn.innerHTML = '';
         }
 

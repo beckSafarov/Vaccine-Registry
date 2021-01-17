@@ -9,14 +9,14 @@ const sendEmailConfirmation = require('../utils/emailConfirmation');
 
 
 paypal.configure({
-    'mode': 'sandbox',
-    'client_id': `${process.env.CLIENT_ID}`,
-    'client_secret': `${process.env.CLIENT_SECRET}`
+    'mode': 'live',
+    'client_id': `${process.env.CLIENT_LIVE_ID}`,
+    'client_secret': `${process.env.CLIENT_LIVE_SECRET}`
 });
 
 
 //@desc      get pay page
-//@route     GET /sandbox/pay/:id
+//@route     GET /live/:id
 //@access    Public
 exports.payPage = asyncHandler(async(req, res, next) => {
     const user = await User.findById(req.params.id);
@@ -25,7 +25,10 @@ exports.payPage = asyncHandler(async(req, res, next) => {
             new ErrorResponse(`Such user not found`, 404)
             );
     }
-
+    paypal.configuration.mode = 'live';
+    paypal.configuration.client_id = process.env.CLIENT_LIVE_ID;
+    paypal.configuration.client_secret = process.env.CLIENT_LIVE_SECRET;
+    
     res.render('payment/pay', {
         amount: user.number,
         root: process.env.root
@@ -33,20 +36,9 @@ exports.payPage = asyncHandler(async(req, res, next) => {
 });
 
 
-//@desc      get pay page
-//@route     GET /pay/sandbox/paypal
-//@access    Public
-exports.paySandbox = asyncHandler(async(req, res, next) => {
-    const amount = 2; 
-    res.render('payment/pay', {
-        amount,
-        root: process.env.root,
-    });
-});
-
 
 //@desc      make payment through Paypal
-//@route     POST /pay/:id
+//@route     POST /live/:id
 //@access    Public
 exports.payPalPayment = asyncHandler(async(req, res, next) => {
     let user = await User.findById(req.params.id);
@@ -96,61 +88,6 @@ exports.payPalPayment = asyncHandler(async(req, res, next) => {
 });
 
 
-//@desc      get success page,
-//@route     GET /pay/success/:id
-//@access    Public
-exports.successPage = asyncHandler(async(req, res, next) => {
-    const payerId = req.query.PayerID;
-    const paymentId = req.query.paymentId;
-    const user = await User.findById(req.params.id);
-    const totalPrice = parseInt(user.number) * 50;
-    const paymentDetails = {
-        payerId,
-        paymentId
-    }
-    const execute_payment_json = {
-        "payer_id": payerId,
-        "transactions": [{
-          "amount": {
-            "currency": "USD",
-            "total": `${totalPrice}`
-          }
-        }]
-      };
-
-    paypal.payment.execute(paymentId, execute_payment_json, async function (error, payment){
-        if(error){
-          console.log(error.response);
-          throw error;
-        }else{
-          console.log(JSON.stringify(payment));
-          user.paid = true; //change the user as paid
-          await user.save(); //save the change
-          sendEmailConfirmation(user, paymentDetails);  //send email confirmation about his payment
-          res.render('payment/success', { //render the success page
-              user: user,
-              payment: paymentDetails,
-              root: process.env.root
-            });
-        }
-      });
-});//end of the successPage
 
 
-//@desc      get failed page,
-//@route     GET /pay/error/:id
-//@access    Public
-exports.errorPage = asyncHandler(async(req, res, next) => {
-    res.render('payment/unsuccessful', {
-        root: process.env.root
-    });
-});
 
-//@desc      test error,
-//@route     GET /pay/sandbox/error
-//@access    Public
-exports.errorSandbox = asyncHandler(async(req, res, next) => {
-    res.render('payment/unsuccessful', {
-        root: process.env.root
-    });
-});

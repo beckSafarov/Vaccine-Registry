@@ -6,7 +6,6 @@ const jwt = require('jsonwebtoken'),
 exports.urlDirect = asyncHandler(async(req, res, next)=>{
     const cookie = req.headers.cookie; 
     if(cookie && cookie.split('=')[0]==='token'){
-        console.log(cookie.split('=')[1]);
         const decoded = jwt.verify(cookie.split('=')[1], process.env.JWT_SECRET); 
         res.redirect('/admin/home');
     }else{

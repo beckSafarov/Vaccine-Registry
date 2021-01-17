@@ -3,6 +3,8 @@ const jwt = require('jsonwebtoken'),
     User = require('../modules/user'),
     asyncHandler = require('../middleware/async'),
     ErrorResponse = require('../utils/errorResponse'); 
+// const {updateAppointmentIntervals} = require('../utils/dateOps');
+const dateOps = require('../utils/dateOps');
 
 //@desc      login page
 //@route     GET /admin
@@ -35,37 +37,40 @@ exports.adminLogin = asyncHandler((req, res, next) => {
 exports.adminHome = asyncHandler(async(req, res, next)=>{
    let data = []; 
    let tab = 'todayTab'; 
+   const users = await User.find({paid:true});
+   const dateOp = new dateOps();  
+   dateOp.updateAppointmentIntervals(users);
+
    if(!req.query.filter || req.query.filter === 'today'){
     data = await User.find(
       {
         paid:true,
         passed: false,
         dayIntervals: {$lte: 1}
-      }).sort({"date": 1, "timeInNumbers": 1});
+      }).sort({"dateIntervals": 1, "timeInNumbers": 1});
   }else if(req.query.filter==='week'){
     data = await User.find(
      {
        paid:true,
        passed: false,
        dayIntervals: {$lte: 7}
-     }).sort({"date": 1, "timeInNumbers": 1});
+     }).sort({"dateIntervals": 1, "timeInNumbers": 1});
      tab = 'weekTab';
   }else if(req.query.filter==='all'){
      data = await User.find(
      {
        paid:true,
-       passed: false
-     }).sort({"date": 1, "timeInNumbers": 1});
+       passed:false
+     }).sort({"dateIntervals": 1, "timeInNumbers": 1});
      tab = 'allTab';
   }else if(req.query.filter==='past'){
      data = await User.find(
      {
        paid:true,
        passed: true
-     }).sort({"date": 1, "timeInNumbers": 1});
+     }).sort({"dateIntervals": -1, "timeInNumbers": 1});
      tab = 'pastTab';
     }//the end of req.query condition
-
 
    const stats = getStats(data); 
    res.render('admin/adminHome', {
@@ -200,6 +205,7 @@ function getStats(data){
   }
   
 }
+
 
 
 

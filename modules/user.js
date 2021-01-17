@@ -3,7 +3,7 @@ const slugify = require('slugify');
 const crypto = require('crypto'); 
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
-const dateDiff = require('../utils/dateDiff');
+const dateOps = require('../utils/dateOps');
 
 const userSchema = new mongoose.Schema({
     name: {
@@ -76,14 +76,10 @@ userSchema.pre('save', function(){
 
 userSchema.methods.getDayIntervals = function(){
   let currentDate = new Date(); 
-   if(this.date < currentDate){
-     //the appointment has passed away
-     this.dayIntervals = dateDiff('d', this.date, currentDate); 
-     this.passed = true; 
-   }else{
-     //the appointment is yet to come
-     this.dayIntervals = dateDiff('d', currentDate, this.date);
-   }
+  const dateOp = new dateOps();
+  let newUserDetails = dateOp.getAppointmentIntervals(this); 
+  this.dayIntervals = newUserDetails.dayIntervals; 
+  this.passed = newUserDetails.passed; 
 }
 
 //sign JWT and return

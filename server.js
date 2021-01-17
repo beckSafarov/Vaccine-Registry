@@ -26,6 +26,7 @@ const routes = require('./routes/routes'),
   payRoutes = require('./routes/payRoutes'),
   emailRoutes = require('./routes/emailRoutes'),
   adminRoutes = require('./routes/adminRoutes'),
+  liveRoute = require('./routes/liveRoutes'),
   connectDB = require('./config/db'); //connecting the database
 
 connectDB();
@@ -49,6 +50,7 @@ app.use('/', routes);  //mounting routes
 app.use('/pay', payRoutes);
 app.use('/email', emailRoutes);
 app.use('/admin', adminRoutes);
+app.use('/live', liveRoute);
 app.use(errorHandler);
 
 

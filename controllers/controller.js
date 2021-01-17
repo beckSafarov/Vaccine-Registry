@@ -39,6 +39,9 @@ exports.about = asyncHandler(async(req, res, next) => {
 //@route     POST /register
 //@access    Public
 exports.createNewUser = asyncHandler(async(req, res, next) => {
+  if(req.body.paid){
+    return next(new ErrorResponse(`Payment data is not accepted`, 404));
+  }
   const newUser = await User.create(req.body);
   newUser.getDayIntervals(); 
   newUser.save(); 
